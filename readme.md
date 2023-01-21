@@ -1,6 +1,7 @@
 # Haiku
 Base client for Fabric 1.19.3
-![](https://github.com/V1li/haiku/blob/master/src/main/resources/assets/haiku/icon.png)
+
+<img style="width: 50px; height: 50px;" src="https://github.com/V1li/haiku/blob/master/src/main/resources/assets/haiku/icon.png">
 
 ## Installation
 1. Clone the repository `git clone https://github.com/V1li/haiku.git`

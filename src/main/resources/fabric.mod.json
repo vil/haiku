@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "haiku",
+  "version": "1.0",
+  "name": "Haiku",
+  "description": "Fabric base client for 1.19.3",
+  "authors": [
+    "Vili"
+  ],
+  "contact": {
+    "website": "https://vili.dev",
+    "repo": "https://github.com/v1li/haiku"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/haiku/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "dev.vili.haiku.Haiku"
+    ]
+  },
+  "mixins": [
+    "haiku.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.13",
+    "minecraft": "1.19.3"
+  }
+}

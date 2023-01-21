@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.vili.haiku.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "ClientConnectionMixin",
+    "ClientPlayerEntityMixin",
+    "InGameHudMixin",
+    "KeyboardMixin",
+    "MinecraftClientMixin",
+    "WorldRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

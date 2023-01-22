@@ -14,7 +14,7 @@ Base client for Fabric 1.19.3
 
 ### Done
 - [x] Make a module manager.
-- [x] Make a settings.
+- [x] Make settings and a setting manager.
 - [x] Make a eventbus.
 - [x] Make the client work.
 

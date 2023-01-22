@@ -4,6 +4,7 @@
 
 package dev.vili.haiku;
 
+import dev.vili.haiku.command.CommandManager;
 import dev.vili.haiku.eventbus.EventBus;
 import dev.vili.haiku.module.ModuleManager;
 import dev.vili.haiku.setting.SettingManager;
@@ -18,6 +19,7 @@ public class Haiku implements ModInitializer {
     public static final MinecraftClient mc = MinecraftClient.getInstance();
     private final EventBus EVENT_BUS = new EventBus();
     private final ModuleManager MODULE_MANAGER = new ModuleManager();
+    private final CommandManager COMMAND_MANAGER = new CommandManager();
     private final SettingManager SETTING_MANAGER = new SettingManager();
 
     public Haiku() {
@@ -61,6 +63,14 @@ public class Haiku implements ModInitializer {
      */
     public ModuleManager getModuleManager() {
         return MODULE_MANAGER;
+    }
+
+    /**
+     * Gets the command manager.
+     * @return
+     */
+    public CommandManager getCommandManager() {
+        return COMMAND_MANAGER;
     }
 
     /**

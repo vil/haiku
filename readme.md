@@ -1,7 +1,9 @@
 # Haiku
+<img style="width: 50px; height: 50px;" src="https://github.com/V1li/haiku/blob/master/src/main/resources/assets/haiku/icon.png" alt="logo">
+
 Base client for Fabric 1.19.3
 
-<img style="width: 50px; height: 50px;" src="https://github.com/V1li/haiku/blob/master/src/main/resources/assets/haiku/icon.png" alt="logo">
+Feel free to use this for your own client.
 
 ## Installation
 1. Clone the repository `git clone https://github.com/V1li/haiku.git`
@@ -9,13 +11,13 @@ Base client for Fabric 1.19.3
 
 ### Todo
 - [ ] Make (skid) a clickgui.
-- [ ] Make commands and a command manager.
 - [ ] Make a config manager.
 
 ### Done
-- [x] Make a module manager.
+- [x] Make example modules and a module manager.
+- [x] Make example command and a command manager.
 - [x] Make settings and a setting manager.
-- [x] Make a eventbus.
+- [x] Make events and a eventbus.
 - [x] Make the client work.
 
 -----------------------------

@@ -9,6 +9,7 @@ import dev.vili.haiku.event.events.PacketEvent;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.Packet;
+import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,6 +27,14 @@ public class ClientConnectionMixin {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;)V", at = @At("HEAD"), cancellable = true)
     private void packetSend(Packet<?> packet, CallbackInfo ci) {
+        /* This is for the client commands */
+        if (packet instanceof ChatMessageC2SPacket pack) {
+            if (pack.chatMessage().startsWith(Haiku.getInstance().getCommandManager().prefix)) {
+                Haiku.getInstance().getCommandManager().execute(pack.chatMessage());
+                ci.cancel();
+            }
+        }
+
         PacketEvent event = new PacketEvent(packet, PacketEvent.Type.SEND);
         Haiku.getInstance().getEventBus().post(event);
         if (event.isCancelled()) ci.cancel();

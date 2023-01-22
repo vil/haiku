@@ -7,7 +7,7 @@ Feel free to use this for your own client.
 
 ## Installation
 1. Clone the repository `git clone https://github.com/V1li/haiku.git`
-2. run `gradlew setupDecompWorkspace`
+2. run `gradlew genSources`
 
 ### Todo
 - [ ] Make (skid) a clickgui.

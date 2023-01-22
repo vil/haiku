@@ -17,7 +17,6 @@ public class SettingManager {
 
     /**
      * Gets the settings.
-     * @return
      */
     public ArrayList<Setting> getSettings() {
         return settings;
@@ -27,7 +26,6 @@ public class SettingManager {
      * Gets a setting by name.
      * @param module
      * @param name
-     * @return
      */
     public Setting getSettingsByName(Module module, String name) {
         for (Setting setting : module.settings) {

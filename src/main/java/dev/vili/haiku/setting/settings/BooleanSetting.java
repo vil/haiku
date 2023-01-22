@@ -16,7 +16,6 @@ public class BooleanSetting extends Setting {
 
     /**
      * Gets the enabled state of the setting.
-     * @return
      */
     public boolean isEnabled() {
         return this.enabled;

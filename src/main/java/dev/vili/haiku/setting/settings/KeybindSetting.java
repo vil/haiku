@@ -16,7 +16,6 @@ public class KeybindSetting extends Setting {
 
     /**
      * Gets the key code.
-     * @return
      */
     public int getKeyCode() {
         return code;

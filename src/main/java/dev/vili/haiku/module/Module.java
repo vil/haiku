@@ -95,7 +95,7 @@ public abstract class Module {
 
     /**
      * Gets the name of the module.
-     * @return
+     *
      */
     public String getName() {
         return this.name;
@@ -103,7 +103,6 @@ public abstract class Module {
 
     /**
      * Gets the description of the module.
-     * @return
      */
     public String getDescription() {
         return this.description;
@@ -111,7 +110,6 @@ public abstract class Module {
 
     /**
      * Gets the category of the module.
-     * @return
      */
     public Category getCategory() {
         return this.category;
@@ -119,7 +117,6 @@ public abstract class Module {
 
     /**
      * Gets the key of the module.
-     * @return
      */
     public int getKey() {
         return this.keyCode.code;
@@ -127,7 +124,6 @@ public abstract class Module {
 
     /**
      * Gets the enabled state of the module.
-     * @return
      */
     public boolean isEnabled() {
         return this.enabled;

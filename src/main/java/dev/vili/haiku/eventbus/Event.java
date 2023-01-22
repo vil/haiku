@@ -10,7 +10,6 @@ public abstract class Event {
 
     /**
      * Gets whether the event is cancelled.
-     * @return
      */
     public boolean isCancelled() {
         return this.cancelled;
@@ -41,7 +40,6 @@ public abstract class Event {
 
     /**
      * Gets the era of the event.
-     * @return
      */
     public Era getEra() {
         return era;

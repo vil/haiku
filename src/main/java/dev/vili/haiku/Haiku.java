@@ -43,7 +43,6 @@ public class Haiku implements ModInitializer {
 
     /**
      * Gets the instance of Haiku.
-     * @return
      */
     public static Haiku getInstance() {
         return INSTANCE;
@@ -51,7 +50,6 @@ public class Haiku implements ModInitializer {
 
     /**
      * Gets the event bus.
-     * @return
      */
     public EventBus getEventBus() {
         return EVENT_BUS;
@@ -59,7 +57,6 @@ public class Haiku implements ModInitializer {
 
     /**
      * Gets the module manager.
-     * @return
      */
     public ModuleManager getModuleManager() {
         return MODULE_MANAGER;
@@ -67,7 +64,6 @@ public class Haiku implements ModInitializer {
 
     /**
      * Gets the command manager.
-     * @return
      */
     public CommandManager getCommandManager() {
         return COMMAND_MANAGER;
@@ -75,7 +71,6 @@ public class Haiku implements ModInitializer {
 
     /**
      * Gets the setting manager.
-     * @return
      */
     public SettingManager getSettingManager() {
         return SETTING_MANAGER;

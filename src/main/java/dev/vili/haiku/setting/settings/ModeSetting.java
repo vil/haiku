@@ -21,7 +21,6 @@ public class ModeSetting extends Setting {
 
     /**
      * Gets the mode of the setting.
-     * @return
      */
     public String getMode() {
         return modes.get(index);
@@ -37,7 +36,6 @@ public class ModeSetting extends Setting {
 
     /**
      * Get the state of current mode.
-     * @return
      */
     public boolean equals(String mode) {
         return (this.index == this.modes.indexOf(mode));

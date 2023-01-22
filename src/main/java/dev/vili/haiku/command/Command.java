@@ -30,7 +30,6 @@ public abstract class Command {
 
     /**
      * Gets the command name
-     * @return
      */
     public String getName() {
         return name;
@@ -38,7 +37,6 @@ public abstract class Command {
 
     /**
      * Gets the command description
-     * @return
      */
     public String getDescription() {
         return description;
@@ -46,7 +44,6 @@ public abstract class Command {
 
     /**
      * Gets the command syntax
-     * @return
      */
     public String getSyntax() {
         return syntax;
@@ -54,7 +51,6 @@ public abstract class Command {
 
     /**
      * Gets the command aliases
-     * @return
      */
     public List<String> getAliases() {
         return aliases;

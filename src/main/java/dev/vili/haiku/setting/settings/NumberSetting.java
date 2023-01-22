@@ -22,7 +22,6 @@ public class NumberSetting extends Setting {
 
     /**
      * Gets the value of the setting.
-     * @return
      */
     public double getValue() {
         return value;
@@ -47,7 +46,6 @@ public class NumberSetting extends Setting {
 
     /**
      * Gets the minimum value of the setting.
-     * @return
      */
     public double getMinimum() {
         return this.minimum;
@@ -63,7 +61,6 @@ public class NumberSetting extends Setting {
 
     /**
      * Gets the maximum value of the setting.
-     * @return
      */
     public double getMaximum() {
         return this.maximum;
@@ -79,7 +76,6 @@ public class NumberSetting extends Setting {
 
     /**
      * Gets the increment value of the setting.
-     * @return
      */
     public double getIncrement() {
         return this.increment;

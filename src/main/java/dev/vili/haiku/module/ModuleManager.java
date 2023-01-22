@@ -26,8 +26,6 @@ public class ModuleManager {
 
     /**
      * Gets the modules.
-     *
-     * @return
      */
     public ArrayList<Module> getModules() {
         return modules;
@@ -35,7 +33,6 @@ public class ModuleManager {
 
     /**
      * Gets enabled modules.
-     * @return
      */
     public ArrayList<Module> getEnabledModules() {
         ArrayList<Module> enabledModules = new ArrayList<>();

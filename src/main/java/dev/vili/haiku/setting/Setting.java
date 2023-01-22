@@ -15,7 +15,6 @@ public class Setting {
 
     /**
      * Gets the name of the setting.
-     * @return
      */
     public String getName() {
         return name;
@@ -23,7 +22,6 @@ public class Setting {
 
     /**
      * Gets the description of the setting.
-     * @return
      */
     public String getDescription() {
         return description;

@@ -15,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 public class EventBus implements IEventBus {
-    private final Map<Class<? extends Event>, CopyOnWriteArrayList<Listener>> listeners = new ConcurrentHashMap<>();
+    private final Map<Class<? extends HaikuEvent>, CopyOnWriteArrayList<Listener>> listeners = new ConcurrentHashMap<>();
 
     /**
      * Registers a object.
@@ -29,10 +29,10 @@ public class EventBus implements IEventBus {
                 .forEach(method -> {
                     if (!method.canAccess(registerClass)) method.setAccessible(true);
 
-                    @SuppressWarnings("unchecked") Class<? extends Event> event =
-                            (Class<? extends Event>) method.getParameterTypes()[0];
+                    @SuppressWarnings("unchecked") Class<? extends HaikuEvent> event =
+                            (Class<? extends HaikuEvent>) method.getParameterTypes()[0];
 
-                    Consumer<Event> lambda = null;
+                    Consumer<HaikuEvent> lambda = null;
                     if (method.getDeclaredAnnotation(HaikuSubscribe.class).lambda()) lambda = getLambda(registerClass, method, event);
                     if (!listeners.containsKey(event)) listeners.put(event, new CopyOnWriteArrayList<>());
 
@@ -54,7 +54,7 @@ public class EventBus implements IEventBus {
      * @param event
      */
     @Override
-    public void post(Event event) {
+    public void post(HaikuEvent event) {
         List<Listener> listenersList = listeners.get(event.getClass());
         if (listenersList != null) for (Listener listener : listenersList) {
             if (event.isCancelled()) return;
@@ -77,8 +77,8 @@ public class EventBus implements IEventBus {
      * @param event
      * @return event lambda
      */
-    protected Consumer<Event> getLambda(Object object, Method method, Class<? extends Event> event) {
-        Consumer<Event> eventLambda = null;
+    protected Consumer<HaikuEvent> getLambda(Object object, Method method, Class<? extends HaikuEvent> event) {
+        Consumer<HaikuEvent> eventLambda = null;
         try {
             MethodHandles.Lookup lookup = MethodHandles.lookup();
             MethodType subscription = MethodType.methodType(void.class, event);
@@ -92,7 +92,7 @@ public class EventBus implements IEventBus {
                     subscription);
 
             MethodHandle factory = site.getTarget();
-            eventLambda = (Consumer<Event>) factory.bindTo(object).invokeExact();
+            eventLambda = (Consumer<HaikuEvent>) factory.bindTo(object).invokeExact();
         } catch (Throwable e) {
             e.printStackTrace();
         }

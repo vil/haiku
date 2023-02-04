@@ -4,7 +4,7 @@
 
 package dev.vili.haiku.eventbus;
 
-public abstract class Event {
+public abstract class HaikuEvent {
     private boolean cancelled;
     private Era era;
 

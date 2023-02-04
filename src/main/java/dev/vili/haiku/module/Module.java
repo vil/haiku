@@ -25,13 +25,12 @@ public abstract class Module {
     public boolean enabled;
     public List<Setting> settings = new ArrayList<>();
 
-    public Module(String name, String description, int key, Category category, boolean enabled) {
+    public Module(String name, String description, int key, Category category, boolean enabledByDefault) {
         super();
         this.name = name;
         this.description = description;
         keyCode.code = key;
         this.category = category;
-        this.enabled = enabled;
 
         /* Add default settings */
         addSettings(keyCode);

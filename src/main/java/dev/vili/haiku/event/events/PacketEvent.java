@@ -4,11 +4,11 @@
 
 package dev.vili.haiku.event.events;
 
-import dev.vili.haiku.event.HaikuEvent;
+import dev.vili.haiku.event.Event;
 import net.minecraft.network.Packet;
 
 @SuppressWarnings("rawtypes")
-public class PacketEvent extends HaikuEvent {
+public class PacketEvent extends Event {
     private final Packet packet;
     private final Type type;
 

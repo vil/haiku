@@ -12,6 +12,7 @@ import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ModuleManager {
     public final ArrayList<Module> modules;
@@ -20,6 +21,7 @@ public class ModuleManager {
         modules = new ArrayList<>();
 
         /* Add modules here */
+        modules.add(new Gui());
         modules.add(new Hud());
         modules.add(new Sprint());
     }
@@ -44,12 +46,32 @@ public class ModuleManager {
     }
 
     /**
+     * Gets the module by name.
+     * @param name
+     */
+    public Module getModule(String name) {
+        return modules.stream().filter(mm -> mm.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+    }
+
+    /**
      * Gets the modules state
      * @param name
      */
     public boolean isModuleEnabled(String name) {
         Module mod = modules.stream().filter(mm -> mm.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
         return mod.isEnabled();
+    }
+
+    /**
+     * Gets the modules by category.
+     * @param category
+     */
+    public List<Module> getModulesByCategory(Module.Category category) {
+        List<Module> cats = new ArrayList<>();
+        for (Module m : modules) {
+            if (m.getCategory() == category) cats.add(m);
+        }
+        return cats;
     }
 
     @HaikuSubscribe

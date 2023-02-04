@@ -10,9 +10,9 @@ import java.util.function.Consumer;
 public final class Listener {
     private final Object listenerClass;
     private final Method method;
-    private final Consumer<Event> lambda;
+    private final Consumer<HaikuEvent> lambda;
 
-    public Listener(final Object listenerClass, final Method method, final Consumer<Event> lambda) {
+    public Listener(final Object listenerClass, final Method method, final Consumer<HaikuEvent> lambda) {
         this.listenerClass = listenerClass;
         this.method = method;
         this.lambda = lambda;
@@ -34,7 +34,7 @@ public final class Listener {
      * Gets the lambda of the listener.
      * @return lambda
      */
-    public Consumer<Event> getLambda() {
+    public Consumer<HaikuEvent> getLambda() {
         return lambda;
     }
 

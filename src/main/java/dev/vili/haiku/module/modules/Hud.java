@@ -9,16 +9,18 @@ import dev.vili.haiku.event.events.RenderInGameHudEvent;
 import dev.vili.haiku.eventbus.HaikuSubscribe;
 import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.settings.BooleanSetting;
+import dev.vili.haiku.setting.settings.StringSetting;
 import net.minecraft.client.gui.DrawableHelper;
 import org.lwjgl.glfw.GLFW;
 
 public class Hud extends Module {
     public final BooleanSetting watermark = new BooleanSetting("Watermark", "Renders the Haiku watermark.", true);
+    public final StringSetting watermarkText = new StringSetting("Watermark Text", "The text of the watermark.", "Haiku");
     public final BooleanSetting arraylist = new BooleanSetting("Arraylist", "Renders the Haiku arraylist.", true);
 
     public Hud() {
         super("Hud", "Renders the Haiku hud.", GLFW.GLFW_KEY_F, Category.RENDER, true);
-        this.addSettings(watermark, arraylist);
+        this.addSettings(watermark, watermarkText, arraylist);
     }
 
     @HaikuSubscribe

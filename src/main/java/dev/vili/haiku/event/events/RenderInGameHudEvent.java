@@ -4,10 +4,10 @@
 
 package dev.vili.haiku.event.events;
 
-import dev.vili.haiku.event.HaikuEvent;
+import dev.vili.haiku.event.Event;
 import net.minecraft.client.util.math.MatrixStack;
 
-public class RenderInGameHudEvent extends HaikuEvent {
+public class RenderInGameHudEvent extends Event {
     private final MatrixStack matrixStack;
 
     public RenderInGameHudEvent(MatrixStack matrixStack) {

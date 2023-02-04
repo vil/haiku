@@ -4,9 +4,9 @@
 
 package dev.vili.haiku.event.events;
 
-import dev.vili.haiku.event.HaikuEvent;
+import dev.vili.haiku.event.Event;
 
-public class KeyEvent extends HaikuEvent {
+public class KeyEvent extends Event {
     private final int key;
     private final int code;
     private final Status status;

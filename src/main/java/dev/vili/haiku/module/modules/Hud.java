@@ -28,7 +28,7 @@ public class Hud extends Module {
         if (mc.world == null || mc.player == null) return;
 
         if (watermark.isEnabled()) {
-            DrawableHelper.drawStringWithShadow(event.getMatrixStack(), mc.textRenderer, Haiku.MOD_NAME + " v" + Haiku.MOD_VERSION,
+            DrawableHelper.drawStringWithShadow(event.getMatrixStack(), mc.textRenderer, watermarkText.getString() + " v" + Haiku.MOD_VERSION,
                     2, 2, 0xFFFFFF);
         }
 

@@ -8,7 +8,10 @@ Gui uses [ImGui](https://github.com/SpaiR/imgui-java).
 Feel free to use this for your own client.
 
 ## Images
-<img style="width: 150px; height: 150px;" src="img/gui.png" alt="gui">
+<details>
+  <summary>click here</summary>
+  <img src="img/gui.png" alt="gui">
+</details>  
 
 ## Installation
 1. Clone the repository `git clone https://github.com/V1li/haiku.git`

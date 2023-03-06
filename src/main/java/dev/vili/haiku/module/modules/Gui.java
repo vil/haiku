@@ -11,7 +11,7 @@ import org.lwjgl.glfw.GLFW;
 public class Gui extends Module {
 
     public Gui() {
-        super("Gui", "Haiku gui.", GLFW.GLFW_KEY_RIGHT_SHIFT, Category.RENDER, false);
+        super("Gui", "Haiku gui.", GLFW.GLFW_KEY_RIGHT_SHIFT, Category.RENDER);
     }
 
     @Override

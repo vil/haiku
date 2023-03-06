@@ -5,6 +5,7 @@
 package dev.vili.haiku;
 
 import dev.vili.haiku.command.CommandManager;
+import dev.vili.haiku.config.ConfigManager;
 import dev.vili.haiku.eventbus.EventBus;
 import dev.vili.haiku.module.ModuleManager;
 import dev.vili.haiku.setting.SettingManager;
@@ -21,6 +22,7 @@ public class Haiku implements ModInitializer {
     private final ModuleManager MODULE_MANAGER = new ModuleManager();
     private final CommandManager COMMAND_MANAGER = new CommandManager();
     private final SettingManager SETTING_MANAGER = new SettingManager();
+    private final ConfigManager CONFIG_MANAGER = new ConfigManager();
 
     public Haiku() {
         INSTANCE = this;
@@ -32,6 +34,8 @@ public class Haiku implements ModInitializer {
     @Override
     public void onInitialize() {
         HaikuLogger.logger.info(MOD_NAME + " v" + MOD_VERSION + " (phase 1) has initialized!");
+        CONFIG_MANAGER.load();
+        HaikuLogger.logger.info("Loaded config!");
     }
 
     /**
@@ -74,5 +78,12 @@ public class Haiku implements ModInitializer {
      */
     public SettingManager getSettingManager() {
         return SETTING_MANAGER;
+    }
+
+    /**
+     * Gets the config manager.
+     */
+    public ConfigManager getConfigManager() {
+        return CONFIG_MANAGER;
     }
 }

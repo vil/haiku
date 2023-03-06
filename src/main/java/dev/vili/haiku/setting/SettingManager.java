@@ -23,7 +23,7 @@ public class SettingManager {
     }
 
     /**
-     * Gets a setting by name.
+     * Gets settings by name.
      * @param module
      * @param name
      */
@@ -34,6 +34,18 @@ public class SettingManager {
             }
         }
         return null;
+    }
+
+    /**
+     * Gets settings by module.
+     * @param module
+     */
+    public ArrayList<Setting> getSettingsByModule(Module module) {
+        ArrayList<Setting> settings = new ArrayList<>();
+        for (Setting setting : module.settings) {
+            settings.add(setting);
+        }
+        return settings;
     }
 
 }

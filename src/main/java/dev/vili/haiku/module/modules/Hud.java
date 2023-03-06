@@ -15,12 +15,12 @@ import org.lwjgl.glfw.GLFW;
 
 public class Hud extends Module {
     public final BooleanSetting watermark = new BooleanSetting("Watermark", "Renders the Haiku watermark.", true);
-    public final StringSetting watermarkText = new StringSetting("Watermark Text", "The text of the watermark.", "Haiku");
+    //public final StringSetting watermarkText = new StringSetting("Watermark Text", "The text of the watermark.", "Haiku");
     public final BooleanSetting arraylist = new BooleanSetting("Arraylist", "Renders the Haiku arraylist.", true);
 
     public Hud() {
-        super("Hud", "Renders the Haiku hud.", GLFW.GLFW_KEY_F, Category.RENDER, true);
-        this.addSettings(watermark, watermarkText, arraylist);
+        super("Hud", "Renders the Haiku hud.", GLFW.GLFW_KEY_UNKNOWN, Category.RENDER);
+        this.addSettings(watermark, arraylist);
     }
 
     @HaikuSubscribe
@@ -28,7 +28,7 @@ public class Hud extends Module {
         if (mc.world == null || mc.player == null) return;
 
         if (watermark.isEnabled()) {
-            DrawableHelper.drawStringWithShadow(event.getMatrixStack(), mc.textRenderer, watermarkText.getString() + " v" + Haiku.MOD_VERSION,
+            DrawableHelper.drawStringWithShadow(event.getMatrixStack(), mc.textRenderer, Haiku.MOD_NAME + " v" + Haiku.MOD_VERSION,
                     2, 2, 0xFFFFFF);
         }
 

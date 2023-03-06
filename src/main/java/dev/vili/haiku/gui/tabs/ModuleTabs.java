@@ -105,10 +105,6 @@ public class ModuleTabs {
                                             : InputUtil.fromKeyCode(((KeybindSetting) setting).getKeyCode(), -1).getLocalizedText().getString();
                                     if (ImGui.button("Bind: " + name)) binding = true;
                                 }
-                            } else if (setting instanceof StringSetting) {
-                                ImGui.inputText(setting.name, (ImString) settingsMap.get(setting));
-                                if (!((StringSetting) setting).getString().equals(((ImString) settingsMap.get(setting)).get()))
-                                    ((StringSetting) setting).setString(((ImString) settingsMap.get(setting)).get());
                             }
                         }
                         if (ImGui.isItemHovered()) ImGui.setTooltip(setting.getDescription());

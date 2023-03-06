@@ -19,9 +19,10 @@ Feel free to use this for your own client.
 3. run `gradlew genSources`
 
 ### Todo
-- [ ] Make a config manager.
+Nothing at the moment. Feel free to open an issue or pull request.
 
 ### Done
+- [x] Make a config manager.
 - [x] Make example modules and a module manager.
 - [x] Make example command and a command manager.
 - [x] Make settings and a setting manager.

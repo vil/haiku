@@ -5,6 +5,7 @@
 package dev.vili.haiku.mixin;
 
 import dev.vili.haiku.Haiku;
+import dev.vili.haiku.util.HaikuLogger;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,5 +20,15 @@ public class MinecraftClientMixin {
             target = "Lnet/minecraft/client/MinecraftClient;setOverlay(Lnet/minecraft/client/gui/screen/Overlay;)V", shift = At.Shift.BEFORE))
     private void init(RunArgs args, CallbackInfo ci) {
         Haiku.getInstance().postInitialize();
+    }
+
+    @Inject(at = {@At(value = "HEAD")}, method = {"close()V"})
+    private void onClose(CallbackInfo ci) {
+        try {
+            Haiku.getInstance().getConfigManager().save();
+            HaikuLogger.logger.info("saved configs on exit.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

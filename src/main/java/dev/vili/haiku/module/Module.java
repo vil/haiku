@@ -25,12 +25,14 @@ public abstract class Module {
     public boolean enabled;
     public List<Setting> settings = new ArrayList<>();
 
-    public Module(String name, String description, int key, Category category, boolean enabledByDefault) {
+    public Module(String name, String description, int key, Category category) {
         super();
         this.name = name;
         this.description = description;
         keyCode.code = key;
         this.category = category;
+
+        if (enabled) setEnabled(true);
 
         /* Add default settings */
         addSettings(keyCode);
@@ -59,23 +61,21 @@ public abstract class Module {
     }
 
     /**
-     * Enables a module.
+     * Called when the module is enabled.
      */
-    public void enable() {
+    public void onEnable() {
         Haiku.getInstance().getEventBus().register(this);
-        onEnable();
-        setEnabled(true);
+        Haiku.getInstance().getConfigManager().save();
 
         HaikuLogger.info(Formatting.GREEN + "Enabled " + this.getName() + "!");
     }
 
     /**
-     * Disables a module.
+     * Called when the module is disabled.
      */
-    public void disable() {
+    public void onDisable() {
         Haiku.getInstance().getEventBus().unregister(this);
-        onDisable();
-        setEnabled(false);
+        Haiku.getInstance().getConfigManager().save();
 
         HaikuLogger.info(Formatting.RED + "Disabled " + this.getName() + "!");
     }
@@ -86,8 +86,15 @@ public abstract class Module {
     public void toggle() {
         enabled = !enabled;
 
-        if (enabled) enable();
-        else disable();
+        if (enabled) onEnable();
+        else onDisable();
+    }
+
+    /**
+     * Gets the enabled state of the module.
+     */
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
     /* -------- Getters -------- */
@@ -121,13 +128,6 @@ public abstract class Module {
         return this.keyCode.code;
     }
 
-    /**
-     * Gets the enabled state of the module.
-     */
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-
     /* -------- Setters -------- */
 
     /**
@@ -143,19 +143,8 @@ public abstract class Module {
      * @param enabled
      */
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-
-        if (enabled) onEnable();
-        else onDisable();
+        if (this.enabled != enabled) {
+            toggle();
+        }
     }
-
-    /**
-     * Called when the module is enabled.
-     */
-    public void onEnable() {}
-
-    /**
-     * Called when the module is disabled.
-     */
-    public void onDisable() {}
 }

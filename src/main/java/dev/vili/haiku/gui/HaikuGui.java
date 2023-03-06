@@ -9,6 +9,7 @@ import dev.vili.haiku.gui.tabs.ModuleTabs;
 import dev.vili.haiku.module.Module;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
+import imgui.flag.ImGuiConfigFlags;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
@@ -55,6 +56,10 @@ public class HaikuGui extends Screen {
         // Setup
         implGlfw.newFrame();
         ImGui.newFrame();
+
+        // Settings
+        // Add input typing
+        ImGui.getIO().addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);
 
         // Styling
         ImGui.getIO().setConfigWindowsMoveFromTitleBarOnly(true);

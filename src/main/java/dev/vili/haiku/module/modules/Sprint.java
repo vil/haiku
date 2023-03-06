@@ -13,7 +13,7 @@ import org.lwjgl.glfw.GLFW;
 public class Sprint extends Module {
 
     public Sprint() {
-        super("Sprint", "Automatically sprints for you.", GLFW.GLFW_KEY_R, Category.MOVEMENT, false);
+        super("Sprint", "Automatically sprints for you.", GLFW.GLFW_KEY_R, Category.MOVEMENT);
     }
 
     @HaikuSubscribe

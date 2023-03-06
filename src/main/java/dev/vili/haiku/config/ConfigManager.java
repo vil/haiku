@@ -7,7 +7,6 @@ package dev.vili.haiku.config;
 import dev.vili.haiku.Haiku;
 import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.Setting;
-import dev.vili.haiku.setting.SettingManager;
 import dev.vili.haiku.setting.settings.BooleanSetting;
 import dev.vili.haiku.setting.settings.ModeSetting;
 import dev.vili.haiku.setting.settings.NumberSetting;

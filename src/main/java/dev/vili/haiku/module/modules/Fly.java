@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ */
+
 package dev.vili.haiku.module.modules;
 
 import dev.vili.haiku.event.events.TickEvent;

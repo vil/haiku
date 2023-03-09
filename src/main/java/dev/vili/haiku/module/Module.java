@@ -32,8 +32,6 @@ public abstract class Module {
         keyCode.code = key;
         this.category = category;
 
-        if (enabled) setEnabled(true);
-
         /* Add default settings */
         addSettings(keyCode);
     }
@@ -84,9 +82,9 @@ public abstract class Module {
      * Toggles a module.
      */
     public void toggle() {
-        enabled = !enabled;
+        this.enabled = !this.enabled;
 
-        if (enabled) onEnable();
+        if (this.enabled) onEnable();
         else onDisable();
     }
 

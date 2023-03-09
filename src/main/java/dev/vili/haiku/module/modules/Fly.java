@@ -26,6 +26,8 @@ public class Fly extends Module {
         mc.player.getAbilities().flying = false;
         mc.player.getAbilities().allowFlying = false;
         mc.player.getAbilities().setFlySpeed(0.05f);
+
+        super.onDisable();
     }
 
     @HaikuSubscribe

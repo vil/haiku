@@ -16,11 +16,11 @@ public class Dummy extends Module {
 
     @Override
     public void onEnable() {
-        HaikuLogger.info("Dummy module enabled!");
+        super.onEnable();
     }
 
     @Override
     public void onDisable() {
-        HaikuLogger.info("Dummy module disabled!");
+        super.onDisable();
     }
 }

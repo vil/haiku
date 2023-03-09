@@ -5,6 +5,7 @@
 package dev.vili.haiku.gui.tabs;
 
 import dev.vili.haiku.Haiku;
+import dev.vili.haiku.gui.HaikuGui;
 import dev.vili.haiku.setting.Setting;
 import dev.vili.haiku.setting.settings.*;
 import dev.vili.haiku.setting.settings.KeybindSetting;
@@ -58,7 +59,7 @@ public class ModuleTabs {
         for (Module.Category category : Module.Category.values()) {
             ImGui.begin(category.name(), ImGuiWindowFlags.NoResize);
             if (!categoryMap.get(category)) {
-                ImGui.setWindowSize(250, 300);
+                ImGui.setWindowSize(250 * HaikuGui.guiWidth.get(), 300 * HaikuGui.guiHeight.get());
                 categoryMap.put(category, true);
             }
 

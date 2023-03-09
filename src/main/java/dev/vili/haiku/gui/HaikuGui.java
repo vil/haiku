@@ -13,6 +13,8 @@ import imgui.flag.ImGuiConfigFlags;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
+import imgui.type.ImFloat;
+import imgui.type.ImInt;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -27,6 +29,8 @@ public class HaikuGui extends Screen {
     MinecraftClient mc = MinecraftClient.getInstance();
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
+    public static final ImFloat guiHeight = new ImFloat(1.0f);
+    public static final ImFloat guiWidth = new ImFloat(1.0f);
 
     public HaikuGui() {
         super(Text.literal("Haiku"));
@@ -72,6 +76,15 @@ public class HaikuGui extends Screen {
             ImGui.separator();
             ImGui.text("Haiku v" + Haiku.MOD_VERSION);
             ImGui.text("Minecraft " + SharedConstants.getGameVersion().getName());
+            ImGui.text("Cmd prefix: " + Haiku.getInstance().getCommandManager().prefix);
+
+            // Sliders to scale the gui.
+            ImGui.sliderFloat("Gui Height", guiHeight.getData(), 0.5f, 2.0f);
+            ImGui.sliderFloat("Gui Width", guiWidth.getData(), 0.5f, 2.0f);
+
+            // Set the gui scale.
+            ImGui.setWindowSize(250 * guiWidth.get(), 120 * guiHeight.get());
+
             ImGui.separator();
             ImGui.text("vili.dev | vili#0001");
 

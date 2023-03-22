@@ -5,7 +5,7 @@
 package dev.vili.haiku.event.events;
 
 import dev.vili.haiku.event.Event;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 
 @SuppressWarnings("rawtypes")
 public class PacketEvent extends Event {

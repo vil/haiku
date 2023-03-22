@@ -11,6 +11,7 @@ import dev.vili.haiku.module.ModuleManager;
 import dev.vili.haiku.setting.SettingManager;
 import dev.vili.haiku.util.HaikuLogger;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.client.MinecraftClient;
 
 public class Haiku implements ModInitializer {
@@ -36,6 +37,12 @@ public class Haiku implements ModInitializer {
         HaikuLogger.logger.info(MOD_NAME + " v" + MOD_VERSION + " (phase 1) has initialized!");
         CONFIG_MANAGER.load();
         HaikuLogger.logger.info("Loaded config!");
+
+        // Save configs on shutdown
+        ClientLifecycleEvents.CLIENT_STOPPING.register(client -> {
+            CONFIG_MANAGER.save();
+            HaikuLogger.logger.info("Saved config!");
+        });
     }
 
     /**

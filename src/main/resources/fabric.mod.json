@@ -3,7 +3,7 @@
   "id": "haiku",
   "version": "1.0",
   "name": "Haiku",
-  "description": "Fabric base client for 1.19.3",
+  "description": "Fabric base client for the latest Fabric version",
   "authors": [
     "Vili"
   ],
@@ -24,6 +24,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.14.13",
-    "minecraft": "1.19.3"
+    "minecraft": ">=1.19.3"
   }
 }

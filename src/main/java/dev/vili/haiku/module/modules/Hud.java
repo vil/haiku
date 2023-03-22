@@ -28,7 +28,7 @@ public class Hud extends Module {
         if (mc.world == null || mc.player == null) return;
 
         if (watermark.isEnabled()) {
-            DrawableHelper.drawStringWithShadow(event.getMatrixStack(), mc.textRenderer, Haiku.MOD_NAME + " v" + Haiku.MOD_VERSION,
+            DrawableHelper.drawTextWithShadow(event.getMatrixStack(), mc.textRenderer, Haiku.MOD_NAME + " v" + Haiku.MOD_VERSION,
                     2, 2, 0xFFFFFF);
         }
 
@@ -36,7 +36,7 @@ public class Hud extends Module {
 
         if (arraylist.isEnabled()) {
             for (Module module : Haiku.getInstance().getModuleManager().getEnabledModules()) {
-                DrawableHelper.drawStringWithShadow(event.getMatrixStack(), mc.textRenderer, module.name, 2, y += 10, 0xFFFFFF);
+                DrawableHelper.drawTextWithShadow(event.getMatrixStack(), mc.textRenderer, module.name, 2, y += 10, 0xFFFFFF);
             }
         }
     }

@@ -21,14 +21,4 @@ public class MinecraftClientMixin {
     private void init(RunArgs args, CallbackInfo ci) {
         Haiku.getInstance().postInitialize();
     }
-
-    @Inject(at = {@At(value = "HEAD")}, method = {"close()V"})
-    private void onClose(CallbackInfo ci) {
-        try {
-            Haiku.getInstance().getConfigManager().save();
-            HaikuLogger.logger.info("saved configs on exit.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

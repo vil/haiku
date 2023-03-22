@@ -8,7 +8,9 @@ import dev.vili.haiku.event.events.TickEvent;
 import dev.vili.haiku.eventbus.HaikuSubscribe;
 import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.settings.NumberSetting;
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import org.lwjgl.glfw.GLFW;
 
 public class Fly extends Module {
@@ -38,11 +40,11 @@ public class Fly extends Module {
         mc.player.getAbilities().allowFlying = true;
         mc.player.getAbilities().setFlySpeed(flySpeed / 10f);
 
-        // Simple anti kick
         antiKickTimer++;
-        if (antiKickTimer > 20 && mc.player.world.getBlockState(new BlockPos(mc.player.getPos().subtract(0, 0.0433D, 0))).isAir()) {
+        if (antiKickTimer > 20) {
             antiKickTimer = 0;
-            mc.player.setPos(mc.player.getX(), mc.player.getY() - 0.0433D, mc.player.getZ());
+            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.0433D, mc.player.getZ(), false));
+            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() - 0.0433D, mc.player.getZ(), true));
         }
     }
 }

@@ -6,7 +6,6 @@ package dev.vili.haiku.module;
 
 import dev.vili.haiku.Haiku;
 import dev.vili.haiku.setting.Setting;
-import dev.vili.haiku.setting.SettingManager;
 import dev.vili.haiku.setting.settings.KeybindSetting;
 import dev.vili.haiku.util.HaikuLogger;
 import net.minecraft.client.MinecraftClient;

@@ -1,7 +1,7 @@
 # Haiku
 <img style="width: 50px; height: 50px;" src="https://github.com/V1li/haiku/blob/master/src/main/resources/assets/haiku/icon.png" alt="logo">
 
-Base client for Fabric 1.19.3
+Base client for the latest Fabric version.
 
 Gui uses [ImGui](https://github.com/SpaiR/imgui-java).
 

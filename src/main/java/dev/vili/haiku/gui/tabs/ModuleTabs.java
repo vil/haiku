@@ -73,39 +73,47 @@ public class ModuleTabs {
                 if (showSettingsMap.get(module)) {
                     for (Setting setting : module.settings) {
                         if (module.settings != null) {
-                            if (setting instanceof BooleanSetting) {
-                                ImGui.checkbox(setting.name, (ImBoolean) settingsMap.get(setting));
-                                if (((BooleanSetting) setting).isEnabled() != ((ImBoolean) settingsMap.get(setting)).get())
-                                    ((BooleanSetting) setting).setEnabled(((ImBoolean) settingsMap.get(setting)).get());
-                            } else if (setting instanceof NumberSetting) {
-                                ImGui.sliderFloat(setting.name, (float[]) settingsMap.get(setting), (float) ((NumberSetting) setting).getMinimum(),
-                                        (float) ((NumberSetting) setting).getMaximum());
-                                float[] temp = (float[]) settingsMap.get(setting);
-                                if (temp[0] != (float) ((NumberSetting) setting).getValue())
-                                    ((NumberSetting) setting).setValue(temp[0]);
-                            } else if (setting instanceof ModeSetting) {
-                                String[] temp = ((ModeSetting) setting).modes.toArray(new String[0]);
-                                ImGui.combo(setting.name, (ImInt) settingsMap.get(setting), temp);
-                                if (((ImInt) settingsMap.get(setting)).get() != ((ModeSetting) setting).modes.indexOf(((ModeSetting) setting).getMode()))
-                                    ((ModeSetting) setting).setMode(((ModeSetting) setting).modes.get(((ImInt) settingsMap.get(setting)).get()));
-                            } else if (setting instanceof KeybindSetting) {
-                                if (binding) {
-                                    ImGui.text("Press a key to bind");
-                                    for (int i = 0; i < 512; i++) {
-                                        if (ImGui.isKeyPressed(i)) {
-                                            // If key is escape or backspace or delete, set value to -1
-                                            if (i == GLFW.GLFW_KEY_ESCAPE || i == GLFW.GLFW_KEY_BACKSPACE || i == GLFW.GLFW_KEY_DELETE) {
-                                                ((KeybindSetting) setting).setKeyCode(-1);
-                                            } else ((KeybindSetting) setting).setKeyCode(i);
-
-                                            binding = false;
+                            switch (setting.getClass().getSimpleName()) {
+                                case "BooleanSetting" -> {
+                                    ImGui.checkbox(setting.name, (ImBoolean) settingsMap.get(setting));
+                                    if (((BooleanSetting) setting).isEnabled() != ((ImBoolean) settingsMap.get(setting)).get())
+                                        ((BooleanSetting) setting).setEnabled(((ImBoolean) settingsMap.get(setting)).get());
+                                }
+                                case "NumberSetting" -> {
+                                    ImGui.sliderFloat(setting.name, (float[]) settingsMap.get(setting), (float) ((NumberSetting) setting).getMinimum(),
+                                            (float) ((NumberSetting) setting).getMaximum());
+                                    float[] temp = (float[]) settingsMap.get(setting);
+                                    if (temp[0] != (float) ((NumberSetting) setting).getValue())
+                                        ((NumberSetting) setting).setValue(temp[0]);
+                                }
+                                case "ModeSetting" -> {
+                                    String[] temp = ((ModeSetting) setting).modes.toArray(new String[0]);
+                                    ImGui.combo(setting.name, (ImInt) settingsMap.get(setting), temp);
+                                    if (((ImInt) settingsMap.get(setting)).get() != ((ModeSetting) setting).modes.indexOf(((ModeSetting) setting).getMode()))
+                                        ((ModeSetting) setting).setMode(((ModeSetting) setting).modes.get(((ImInt) settingsMap.get(setting)).get()));
+                                }
+                                case "KeybindSetting" -> {
+                                    if (binding) {
+                                        ImGui.text("Press a key to bind");
+                                        for (int i = 0; i < 512; i++) {
+                                            if (ImGui.isKeyPressed(i)) {
+                                                if (i == GLFW.GLFW_KEY_ESCAPE || i == GLFW.GLFW_KEY_BACKSPACE || i == GLFW.GLFW_KEY_DELETE) {
+                                                    ((KeybindSetting) setting).setKeyCode(-1);
+                                                } else {
+                                                    ((KeybindSetting) setting).setKeyCode(i);
+                                                }
+                                                binding = false;
+                                            }
+                                        }
+                                    } else {
+                                        String name = ((KeybindSetting) setting).getKeyCode() < 0 ? "NONE"
+                                                : InputUtil.fromKeyCode(((KeybindSetting) setting).getKeyCode(), -1).getLocalizedText().getString();
+                                        if (ImGui.button("Bind: " + name)) {
+                                            binding = true;
                                         }
                                     }
-                                } else {
-                                    String name = ((KeybindSetting) setting).getKeyCode() < 0 ? "NONE"
-                                            : InputUtil.fromKeyCode(((KeybindSetting) setting).getKeyCode(), -1).getLocalizedText().getString();
-                                    if (ImGui.button("Bind: " + name)) binding = true;
                                 }
+                                default -> ImGui.text("Unknown setting type");
                             }
                         }
                         if (ImGui.isItemHovered()) ImGui.setTooltip(setting.getDescription());

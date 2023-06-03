@@ -41,7 +41,7 @@ public class Fly extends Module {
         mc.player.getAbilities().setFlySpeed(flySpeed / 10f);
 
         antiKickTimer++;
-        if (antiKickTimer > 20) {
+        if (antiKickTimer > 20 && mc.player.world.getBlockState(BlockPos.ofFloored(mc.player.getPos().subtract(0, 0.0433D, 0))).isAir()) {
             antiKickTimer = 0;
             mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + 0.0433D, mc.player.getZ(), false));
             mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() - 0.0433D, mc.player.getZ(), true));

@@ -108,21 +108,34 @@ public class ConfigManager {
             for (Module module : Haiku.getInstance().getModuleManager().getModules()) {
                 if (Boolean.parseBoolean(properties.getProperty(module.getName() + ".enabled")) != module.isEnabled())
                     module.setEnabled(Boolean.parseBoolean(properties.getProperty(module.getName() + ".enabled"))); // Set the enabled state.
-                if (properties.getProperty(module.getName() + ".key") != null)
-                    module.setKey(Integer.parseInt(properties.getProperty(module.getName() + ".key"))); // Set the key.
 
                 for (Setting setting : module.settings) {
-                    if (setting instanceof BooleanSetting) {
-                        ((BooleanSetting) setting).setEnabled(Boolean.parseBoolean(properties.getProperty(module.getName() + "." + setting.getName())));
-                    }
-                    else if (setting instanceof NumberSetting) {
-                        ((NumberSetting) setting).setValue(Double.parseDouble(properties.getProperty(module.getName() + "." + setting.getName())));
-                    }
-                    else if (setting instanceof StringSetting) {
-                        ((StringSetting) setting).setString(properties.getProperty(module.getName() + "." + setting.getName()));
-                    }
-                    else if (setting instanceof ModeSetting) {
-                        ((ModeSetting) setting).setMode(properties.getProperty(module.getName() + "." + setting.getName()));
+                    switch (setting.getClass().getSimpleName()) {
+                        case "BooleanSetting" -> {
+                            BooleanSetting booleanSetting = (BooleanSetting) setting;
+                            if (Boolean.parseBoolean(properties.getProperty(module.getName() + "." + setting.getName())) != booleanSetting.isEnabled())
+                                booleanSetting.setEnabled(Boolean.parseBoolean(properties.getProperty(module.getName() + "." + setting.getName())));
+                        }
+                        case "NumberSetting" -> {
+                            NumberSetting numberSetting = (NumberSetting) setting;
+                            if (Double.parseDouble(properties.getProperty(module.getName() + "." + setting.getName())) != numberSetting.getValue())
+                                numberSetting.setValue(Double.parseDouble(properties.getProperty(module.getName() + "." + setting.getName())));
+                        }
+                        case "StringSetting" -> {
+                            StringSetting stringSetting = (StringSetting) setting;
+                            if (!properties.getProperty(module.getName() + "." + setting.getName()).equals(stringSetting.getString()))
+                                stringSetting.setString(properties.getProperty(module.getName() + "." + setting.getName()));
+                        }
+                        case "ModeSetting" -> {
+                            ModeSetting modeSetting = (ModeSetting) setting;
+                            if (!properties.getProperty(module.getName() + "." + setting.getName()).equals(modeSetting.getMode()))
+                                modeSetting.setMode(properties.getProperty(module.getName() + "." + setting.getName()));
+                        }
+                        case "KeybindSetting" -> {
+                            if (properties.getProperty(module.getName() + ".key") != null)
+                                module.setKey(Integer.parseInt(properties.getProperty(module.getName() + ".key"))); // Set the key.
+                        }
+                        default -> HaikuLogger.logger.error("Unknown setting type: " + setting.getClass().getSimpleName());
                     }
                 }
             }

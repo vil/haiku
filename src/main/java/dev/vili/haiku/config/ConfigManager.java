@@ -65,20 +65,27 @@ public class ConfigManager {
 
             for (Module module : Haiku.getInstance().getModuleManager().getModules()) {
                 properties.setProperty(module.getName() + ".enabled", String.valueOf(module.isEnabled()));
-                properties.setProperty(module.getName() + ".key", String.valueOf(module.getKey()));
 
                 for (Setting setting : module.settings) {
-                    if (setting instanceof BooleanSetting) {
-                        properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(((BooleanSetting) setting).isEnabled()));
-                    }
-                    else if (setting instanceof NumberSetting) {
-                        properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(((NumberSetting) setting).getValue()));
-                    }
-                    else if (setting instanceof StringSetting) {
-                        properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(((dev.vili.haiku.setting.settings.StringSetting) setting).getString()));
-                    }
-                    else if (setting instanceof ModeSetting) {
-                        properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(((ModeSetting) setting).getMode()));
+                    switch (setting.getClass().getSimpleName()) {
+                        case "BooleanSetting" -> {
+                            BooleanSetting booleanSetting = (BooleanSetting) setting;
+                            properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(booleanSetting.isEnabled()));
+                        }
+                        case "NumberSetting" -> {
+                            NumberSetting numberSetting = (NumberSetting) setting;
+                            properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(numberSetting.getValue()));
+                        }
+                        case "StringSetting" -> {
+                            StringSetting stringSetting = (StringSetting) setting;
+                            properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(stringSetting.getString()));
+                        }
+                        case "ModeSetting" -> {
+                            ModeSetting modeSetting = (ModeSetting) setting;
+                            properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(modeSetting.getMode()));
+                        }
+                        case "KeybindSetting" -> properties.setProperty(module.getName() + ".key", String.valueOf(module.getKey()));
+                        default -> HaikuLogger.logger.error("Unknown setting type: " + setting.getClass().getSimpleName());
                     }
                 }
 

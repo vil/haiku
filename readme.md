@@ -31,7 +31,7 @@ Nothing at the moment. Feel free to open an issue or pull request.
 - [x] Make the client work.
 
 ## Need help?
-Open an issue or contact me via discord `vili.`.
+Open an issue or contact me via discord `v1li`.
 
 -----------------------------
 ## Licence

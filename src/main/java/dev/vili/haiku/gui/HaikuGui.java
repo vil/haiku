@@ -17,6 +17,7 @@ import imgui.type.ImFloat;
 import imgui.type.ImInt;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
@@ -50,13 +51,13 @@ public class HaikuGui extends Screen {
 
     /**
      * Renders the gui.
-     * @param matrixStack
+     * @param context
      * @param mouseX
      * @param mouseY
      * @param delta
      */
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         // Setup
         implGlfw.newFrame();
         ImGui.newFrame();
@@ -98,7 +99,7 @@ public class HaikuGui extends Screen {
         // Render
         ImGui.render();
         implGl3.renderDrawData(ImGui.getDrawData());
-        super.render(matrixStack, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
     }
 
     @Override

@@ -6,6 +6,7 @@ package dev.vili.haiku.mixin;
 
 import dev.vili.haiku.Haiku;
 import dev.vili.haiku.event.events.RenderInGameHudEvent;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class InGameHudMixin {
 
     @Inject(method = "render", at = @At("RETURN"), cancellable = true)
-    private void render(MatrixStack matrixStack, float tickDelta, CallbackInfo ci) {
-        RenderInGameHudEvent event = new RenderInGameHudEvent(matrixStack);
+    private void render(DrawContext context, float tickDelta, CallbackInfo ci) {
+        RenderInGameHudEvent event = new RenderInGameHudEvent(context);
         Haiku.getInstance().getEventBus().post(event);
 
         if (event.isCancelled()) ci.cancel();

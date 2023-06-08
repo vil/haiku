@@ -9,8 +9,6 @@ import dev.vili.haiku.event.events.RenderInGameHudEvent;
 import dev.vili.haiku.eventbus.HaikuSubscribe;
 import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.settings.BooleanSetting;
-import dev.vili.haiku.setting.settings.StringSetting;
-import net.minecraft.client.gui.DrawableHelper;
 import org.lwjgl.glfw.GLFW;
 
 public class Hud extends Module {
@@ -28,7 +26,7 @@ public class Hud extends Module {
         if (mc.world == null || mc.player == null) return;
 
         if (watermark.isEnabled()) {
-            DrawableHelper.drawTextWithShadow(event.getMatrixStack(), mc.textRenderer, Haiku.MOD_NAME + " v" + Haiku.MOD_VERSION,
+            event.getContext().drawTextWithShadow(mc.textRenderer, Haiku.MOD_NAME + " v" + Haiku.MOD_VERSION,
                     2, 2, 0xFFFFFF);
         }
 
@@ -36,7 +34,7 @@ public class Hud extends Module {
 
         if (arraylist.isEnabled()) {
             for (Module module : Haiku.getInstance().getModuleManager().getEnabledModules()) {
-                DrawableHelper.drawTextWithShadow(event.getMatrixStack(), mc.textRenderer, module.name, 2, y += 10, 0xFFFFFF);
+                event.getContext().drawTextWithShadow(mc.textRenderer, module.name, 2, y += 10, 0xFFFFFF);
             }
         }
     }

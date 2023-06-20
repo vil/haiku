@@ -10,6 +10,7 @@ import dev.vili.haiku.setting.Setting;
 import dev.vili.haiku.setting.settings.*;
 import dev.vili.haiku.setting.settings.KeybindSetting;
 import dev.vili.haiku.module.Module;
+import dev.vili.haiku.util.HaikuLogger;
 import imgui.ImGui;
 import imgui.flag.ImGuiConfigFlags;
 import imgui.flag.ImGuiWindowFlags;
@@ -42,18 +43,16 @@ public class ModuleTabs {
             }
 
             for (Setting setting : module.settings) {
-                if (setting instanceof BooleanSetting) {
-                    settingsMap.put(setting, new ImBoolean(((BooleanSetting) setting).isEnabled()));
-                } else if (setting instanceof NumberSetting) {
-                    settingsMap.put(setting, new float[]{(float) ((NumberSetting) setting).getValue()});
-                } else if (setting instanceof ModeSetting) {
-                    settingsMap.put(setting, new ImInt(((ModeSetting) setting).index));
-                } else if (setting instanceof KeybindSetting) {
-                    settingsMap.put(setting, new ImInt(((KeybindSetting) setting).getKeyCode()));
-                } else if (setting instanceof StringSetting) {
-                    settingsMap.put(setting, new ImString(((StringSetting) setting).getString()));
+                switch (setting.getClass().getSimpleName()) {
+                    case "BooleanSetting" -> settingsMap.put(setting, new ImBoolean(((BooleanSetting) setting).isEnabled()));
+                    case "NumberSetting" -> settingsMap.put(setting, new float[]{(float) ((NumberSetting) setting).getValue()});
+                    case "ModeSetting" -> settingsMap.put(setting, new ImInt(((ModeSetting) setting).index));
+                    case "KeybindSetting" -> settingsMap.put(setting, new ImInt(((KeybindSetting) setting).getKeyCode()));
+                    case "StringSetting" -> settingsMap.put(setting, new ImString(((StringSetting) setting).getString()));
+                    default -> HaikuLogger.logger.warn("Unknown setting type: " + setting.getClass().getSimpleName());
                 }
             }
+
         }
 
         for (Module.Category category : Module.Category.values()) {
@@ -125,5 +124,3 @@ public class ModuleTabs {
         }
     }
 }
-// Some parts of the code is from vmod.
-// Leaked lulw

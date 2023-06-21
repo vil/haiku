@@ -3,7 +3,7 @@
   "id": "haiku",
   "version": "1.0",
   "name": "Haiku",
-  "description": "Fabric base client for the latest Fabric version",
+  "description": "Open source base client for the latest Fabric version.",
   "authors": [
     "Vili"
   ],
@@ -23,7 +23,7 @@
     "haiku.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.13",
-    "minecraft": ">=1.19.3"
+    "fabricloader": ">=0.14.21",
+    "minecraft": ">=1.20"
   }
 }

@@ -37,7 +37,7 @@ public class PacketEvent extends Event {
      */
     public enum Type {
         SEND,
-        RECEIVE
+        RECEIVE;
     }
 
     /* Posted on ClientConnectionMixin */

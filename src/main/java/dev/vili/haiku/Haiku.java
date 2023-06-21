@@ -10,6 +10,7 @@ import dev.vili.haiku.eventbus.EventBus;
 import dev.vili.haiku.module.ModuleManager;
 import dev.vili.haiku.setting.SettingManager;
 import dev.vili.haiku.util.HaikuLogger;
+import dev.vili.haiku.util.TPSUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.client.MinecraftClient;
@@ -49,6 +50,8 @@ public class Haiku implements ModInitializer {
      * Called when Minecraft has finished loading.
      */
     public void postInitialize() {
+        EVENT_BUS.register(TPSUtil.INSTANCE);
+        HaikuLogger.logger.info("Registered TickRateUtil!");
         HaikuLogger.logger.info(MOD_NAME + " v" + MOD_VERSION + " (phase 2) has initialized!");
     }
 

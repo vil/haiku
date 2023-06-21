@@ -32,7 +32,6 @@ public class ModuleTabs {
      * Renders the module tabs.
      */
     public static void render() {
-        /* Code is a mess. */
         ImGui.getIO().addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);
         for (Module module : Haiku.getInstance().getModuleManager().modules) {
             showSettingsMap.put(module, showSettingsMap.getOrDefault(module, false));

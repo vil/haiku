@@ -6,7 +6,6 @@ package dev.vili.haiku.gui;
 
 import dev.vili.haiku.Haiku;
 import dev.vili.haiku.gui.tabs.ModuleTabs;
-import dev.vili.haiku.module.Module;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiConfigFlags;
@@ -14,12 +13,10 @@ import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import imgui.type.ImFloat;
-import imgui.type.ImInt;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 /**
@@ -87,7 +84,7 @@ public class HaikuGui extends Screen {
             ImGui.setWindowSize(250 * guiWidth.get(), 120 * guiHeight.get());
 
             ImGui.separator();
-            ImGui.text("vili.dev | vili#0001");
+            ImGui.text("vili.dev");
 
             // Render module tabs
             ModuleTabs.render();

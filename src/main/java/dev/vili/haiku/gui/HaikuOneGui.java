@@ -22,6 +22,7 @@ import imgui.glfw.ImGuiImplGlfw;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImString;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -88,6 +89,10 @@ public class HaikuOneGui extends Screen {
         ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove);
         ImGui.setWindowSize(800, 600);
         ImGui.text("Welcome to Haiku!");
+        ImGui.separator();
+        ImGui.text("Haiku v" + Haiku.MOD_VERSION);
+        ImGui.text("Minecraft " + SharedConstants.getGameVersion().getName());
+        ImGui.text("Cmd prefix: " + Haiku.getInstance().getCommandManager().prefix);
         ImGui.separator();
         ImGui.text("vili.dev");
 

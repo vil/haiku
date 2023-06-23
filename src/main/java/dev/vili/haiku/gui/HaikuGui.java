@@ -72,7 +72,7 @@ public class HaikuGui extends Screen {
         ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 255, 255, 255, 125);
 
         // Window
-        if (ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION, ImGuiWindowFlags.NoResize)) {
+        if (ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " | Info tab", ImGuiWindowFlags.NoResize)) {
             ImGui.setWindowSize(250, 120);
             ImGui.text("Welcome to Haiku!");
             ImGui.separator();

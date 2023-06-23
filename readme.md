@@ -9,8 +9,9 @@ Feel free to use this for your own client.
 
 ## Images
 <details>
-  <summary>click here</summary>
-  <img src="img/gui.png" alt="gui">
+    <summary>click here</summary>
+    <img src="img/gui.png" alt="gui">
+    <img src="img/onegui.png" alt="onegui">
 </details>  
 
 ## Installation

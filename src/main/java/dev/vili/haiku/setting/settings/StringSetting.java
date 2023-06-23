@@ -19,7 +19,7 @@ public class StringSetting extends Setting {
 
     /**
      * Sets the value of the setting.
-     * @param string
+     * @param string value to set
      */
     public void setString(String string) {
         this.string = string;

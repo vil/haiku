@@ -29,7 +29,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the value of the setting.
-     * @param value
+     * @param value value to set
      */
     public void setValue(double value) {
         double precision = 1.0D / this.increment;
@@ -38,7 +38,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Increments the value of the setting.
-     * @param positive
+     * @param positive whether to increment positively or negatively
      */
     public void increment(boolean positive) {
         setValue(getValue() + (positive ? 1 : -1) * increment);
@@ -53,7 +53,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the minimum value of the setting.
-     * @param minimum
+     * @param minimum minimum value to set
      */
     public void setMinimum(double minimum) {
         this.minimum = minimum;
@@ -68,7 +68,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the maximum value of the setting.
-     * @param maximum
+     * @param maximum maximum value to set
      */
     public void setMaximum(double maximum) {
         this.maximum = maximum;
@@ -83,7 +83,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the increment value of the setting.
-     * @param increment
+     * @param increment increment value to set
      */
     public void setIncrement(double increment) {
         this.increment = increment;

@@ -23,7 +23,7 @@ public class KeybindSetting extends Setting {
 
     /**
      * Sets the key code.
-     * @param keyCode
+     * @param keyCode key code to set
      */
     public void setKeyCode(int keyCode) {
         this.code = keyCode;

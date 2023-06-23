@@ -39,7 +39,7 @@ public abstract class Module {
     /**
      * Adds settings to the module.
      * Must be called in the constructor.
-     * @param settings
+     * @param settings settings to add
      */
     public void addSettings(Setting... settings) {
         this.settings.addAll(Arrays.asList(settings));
@@ -129,7 +129,7 @@ public abstract class Module {
 
     /**
      * Sets the key of the module.
-     * @param key
+     * @param key key to set
      */
     public void setKey(int key) {
         this.keyCode.code = key;
@@ -137,7 +137,7 @@ public abstract class Module {
 
     /**
      * Sets the enabled state of the module.
-     * @param enabled
+     * @param enabled enabled state to set
      */
     public void setEnabled(boolean enabled) {
         if (this.enabled != enabled) {

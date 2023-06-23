@@ -23,7 +23,7 @@ public class BooleanSetting extends Setting {
 
     /**
      * Sets the enabled state of the setting.
-     * @param enabled
+     * @param enabled enabled state to set
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;

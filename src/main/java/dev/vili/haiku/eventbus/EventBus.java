@@ -19,7 +19,7 @@ public class EventBus implements IEventBus {
 
     /**
      * Registers a object.
-     * @param registerClass
+     * @param registerClass object to register
      */
     @Override
     public void register(Object registerClass) {
@@ -42,7 +42,7 @@ public class EventBus implements IEventBus {
 
     /**
      * Unregisters a object.
-     * @param registerClass
+     * @param registerClass object to unregister
      */
     @Override
     public void unregister(Object registerClass) {
@@ -51,7 +51,7 @@ public class EventBus implements IEventBus {
 
     /**
      * Posts an event.
-     * @param event
+     * @param event event to post
      */
     @Override
     public void post(HaikuEvent event) {
@@ -72,9 +72,9 @@ public class EventBus implements IEventBus {
 
     /**
      * Gets the lambda of the listener.
-     * @param object
-     * @param method
-     * @param event
+     * @param object object
+     * @param method method
+     * @param event event
      * @return event lambda
      */
     protected Consumer<HaikuEvent> getLambda(Object object, Method method, Class<? extends HaikuEvent> event) {

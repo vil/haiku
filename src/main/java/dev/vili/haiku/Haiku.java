@@ -15,6 +15,9 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.client.MinecraftClient;
 
+/**
+ * Main class for haiku.
+ */
 public class Haiku implements ModInitializer {
     private static Haiku INSTANCE;
     public static final String MOD_NAME = "Haiku";

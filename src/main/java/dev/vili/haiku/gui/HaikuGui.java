@@ -48,10 +48,10 @@ public class HaikuGui extends Screen {
 
     /**
      * Renders the gui.
-     * @param context
-     * @param mouseX
-     * @param mouseY
-     * @param delta
+     * @param context The context to render in
+     * @param mouseX The mouse x position
+     * @param mouseY The mouse y position
+     * @param delta The delta time
      */
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -99,12 +99,18 @@ public class HaikuGui extends Screen {
         super.render(context, mouseX, mouseY, delta);
     }
 
+    /**
+     * Should the gui close when the escape key is pressed?
+     */
     @Override
     public boolean shouldCloseOnEsc() {
         Haiku.getInstance().getModuleManager().getModule("Gui").setEnabled(false);
         return true;
     }
 
+    /**
+     * Called when the gui is closed.
+     */
     @Override
     public void close() {
         mc.setScreen(null);

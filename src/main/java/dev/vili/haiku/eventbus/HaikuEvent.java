@@ -17,7 +17,7 @@ public abstract class HaikuEvent {
 
     /**
      * Sets whether the event is cancelled.
-     * @param cancelled
+     * @param cancelled whether the event is cancelled
      */
     public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
@@ -32,7 +32,7 @@ public abstract class HaikuEvent {
 
     /**
      * Sets the era of the event.
-     * @param era
+     * @param era era of the event
      */
     public void setEra(Era era) {
         this.era = era;

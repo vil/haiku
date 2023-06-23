@@ -23,8 +23,8 @@ public abstract class Command {
 
     /**
      * Called when the command is executed
-     * @param args
-     * @param command
+     * @param args arguments passed
+     * @param command command name
      */
     public void onCommand(String[] args, String command) {}
 
@@ -58,7 +58,7 @@ public abstract class Command {
 
     /**
      * Sets the command name
-     * @param name
+     * @param name name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -66,7 +66,7 @@ public abstract class Command {
 
     /**
      * Sets the command description
-     * @param description
+     * @param description description to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -74,7 +74,7 @@ public abstract class Command {
 
     /**
      * Sets the command syntax
-     * @param syntax
+     * @param syntax syntax to set
      */
     public void setSyntax(String syntax) {
         this.syntax = syntax;
@@ -82,7 +82,7 @@ public abstract class Command {
 
     /**
      * Sets the command aliases
-     * @param aliases
+     * @param aliases aliases to set
      */
     public void setAliases(List<String> aliases) {
         this.aliases = aliases;

@@ -24,6 +24,7 @@ public class ModuleManager {
         modules.add(new Dummy());
         modules.add(new Fly());
         modules.add(new Gui());
+        modules.add(new OneGui());
         modules.add(new Hud());
         modules.add(new Sprint());
     }
@@ -49,7 +50,7 @@ public class ModuleManager {
 
     /**
      * Gets the module by name.
-     * @param name
+     * @param name name of the module
      */
     public Module getModule(String name) {
         return modules.stream().filter(mm -> mm.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
@@ -57,7 +58,7 @@ public class ModuleManager {
 
     /**
      * Gets the modules state
-     * @param name
+     * @param name name of the module
      */
     public boolean isModuleEnabled(String name) {
         Module mod = modules.stream().filter(mm -> mm.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
@@ -66,7 +67,7 @@ public class ModuleManager {
 
     /**
      * Gets the modules by category.
-     * @param category
+     * @param category category of the module
      */
     public List<Module> getModulesByCategory(Module.Category category) {
         List<Module> cats = new ArrayList<>();

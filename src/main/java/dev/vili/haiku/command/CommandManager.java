@@ -26,7 +26,7 @@ public class CommandManager {
 
     /**
      * Executes a command
-     * @param command
+     * @param command command to execute
      */
     public void execute(String command) {
         String message = command;
@@ -50,7 +50,7 @@ public class CommandManager {
 
     /**
      * Gets a command by name.
-     * @param name
+     * @param name name of command
      */
     public Command getCommand(String name) {
         for (Command command : commands) {

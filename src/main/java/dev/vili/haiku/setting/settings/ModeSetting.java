@@ -28,7 +28,7 @@ public class ModeSetting extends Setting {
 
     /**
      * Sets the mode of the setting.
-     * @param mode
+     * @param mode mode to set
      */
     public void setMode(String mode) {
         this.index = this.modes.indexOf(mode);

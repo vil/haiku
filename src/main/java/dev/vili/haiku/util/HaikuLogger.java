@@ -24,7 +24,7 @@ public class HaikuLogger {
     /**
      * Logs a message to the console or the chat.
      *
-     * @param s
+     * @param s The message to log.
      */
 
     public static void info(String s) {
@@ -44,7 +44,7 @@ public class HaikuLogger {
     /**
      * Logs a warning to the console or the chat.
      *
-     * @param s
+     * @param s The warning to log.
      */
 
     public static void warn(String s) {
@@ -64,7 +64,7 @@ public class HaikuLogger {
     /**
      * Logs an error to the console or the chat.
      *
-     * @param s
+     * @param s The error to log.
      */
 
     public static void error(String s) {
@@ -84,7 +84,7 @@ public class HaikuLogger {
     /**
      * Logs a message to the console or the chat without the prefix.
      *
-     * @param s
+     * @param s The message to log.
      */
     public static void noPrefix(String s) {
         noPrefix(Text.literal(s));

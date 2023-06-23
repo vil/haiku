@@ -36,5 +36,4 @@ Open an issue or contact me via discord `v1li`.
 
 -----------------------------
 ## Licence
-Copyright (c) 2023 Vili (https://vili.dev) -
-All rights reserved.
+> [This source code is under the GNU General Public License, version 3.](https://www.gnu.org/licenses/gpl-3.0.txt)

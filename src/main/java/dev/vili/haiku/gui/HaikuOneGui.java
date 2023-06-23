@@ -42,6 +42,7 @@ public class HaikuOneGui extends Screen {
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
+    private Module activeModule;
     MinecraftClient mc = MinecraftClient.getInstance();
 
     public HaikuOneGui() {
@@ -169,12 +170,11 @@ public class HaikuOneGui extends Screen {
                 }
                 case "KeybindSetting" -> {
                     KeybindSetting keybindSetting = (KeybindSetting) setting;
-                    if (binding) {
+                    if (binding && activeModule == module) { // Check if the module is active for keybind changes
                         ImGui.text("Press a key to bind");
                         for (int i = 0; i < 512; i++) {
                             if (ImGui.isKeyPressed(i)) {
-                                if (i == GLFW.GLFW_KEY_ESCAPE || i == GLFW.GLFW_KEY_BACKSPACE
-                                        || i == GLFW.GLFW_KEY_DELETE) {
+                                if (i == GLFW.GLFW_KEY_ESCAPE || i == GLFW.GLFW_KEY_BACKSPACE || i == GLFW.GLFW_KEY_DELETE) {
                                     keybindSetting.setKeyCode(-1);
                                 } else {
                                     keybindSetting.setKeyCode(i);
@@ -184,9 +184,9 @@ public class HaikuOneGui extends Screen {
                         }
                     } else {
                         String name = keybindSetting.getKeyCode() < 0 ? "NONE"
-                                : InputUtil.fromKeyCode(keybindSetting.getKeyCode(), -1).getLocalizedText()
-                                .getString();
+                                : InputUtil.fromKeyCode(keybindSetting.getKeyCode(), -1).getLocalizedText().getString();
                         if (ImGui.button("Bind: " + name)) {
+                            activeModule = module; // Set the active module for keybind changes
                             binding = true;
                         }
                     }

@@ -30,6 +30,7 @@ public class ModuleTabs {
     private static final HashMap<Module.Category, Boolean> categoryMap = new HashMap<>();
     private static final HashMap<Module, Boolean> showSettingsMap = new HashMap<>();
     private static boolean binding;
+    private static Module activeModule;
 
     /**
      * Renders the module tabs.
@@ -134,7 +135,7 @@ public class ModuleTabs {
                         }
                     }
                     case "KeybindSetting" -> {
-                        if (binding) {
+                        if (binding && activeModule == module) { // Check if the module is active for keybind changes
                             ImGui.text("Press a key to bind");
                             for (int i = 0; i < 512; i++) {
                                 if (ImGui.isKeyPressed(i)) {
@@ -150,11 +151,12 @@ public class ModuleTabs {
                             String name = ((KeybindSetting) setting).getKeyCode() < 0 ? "NONE"
                                     : InputUtil.fromKeyCode(((KeybindSetting) setting).getKeyCode(), -1).getLocalizedText().getString();
                             if (ImGui.button("Bind: " + name)) {
+                                activeModule = module; // Set the active module for keybind changes
                                 binding = true;
                             }
                         }
                     }
-                    default -> ImGui.text("Unknown setting type");
+                    default -> HaikuLogger.logger.warn("Unknown setting type: " + setting.getClass().getSimpleName());
                 }
             }
             if (ImGui.isItemHovered()) {

@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.config;
@@ -84,8 +87,10 @@ public class ConfigManager {
                             ModeSetting modeSetting = (ModeSetting) setting;
                             properties.setProperty(module.getName() + "." + setting.getName(), String.valueOf(modeSetting.getMode()));
                         }
-                        case "KeybindSetting" -> properties.setProperty(module.getName() + ".key", String.valueOf(module.getKey()));
-                        default -> HaikuLogger.logger.error("Unknown setting type: " + setting.getClass().getSimpleName());
+                        case "KeybindSetting" ->
+                                properties.setProperty(module.getName() + ".key", String.valueOf(module.getKey()));
+                        default ->
+                                HaikuLogger.logger.error("Unknown setting type: " + setting.getClass().getSimpleName());
                     }
                 }
 
@@ -135,7 +140,8 @@ public class ConfigManager {
                             if (properties.getProperty(module.getName() + ".key") != null)
                                 module.setKey(Integer.parseInt(properties.getProperty(module.getName() + ".key"))); // Set the key.
                         }
-                        default -> HaikuLogger.logger.error("Unknown setting type: " + setting.getClass().getSimpleName());
+                        default ->
+                                HaikuLogger.logger.error("Unknown setting type: " + setting.getClass().getSimpleName());
                     }
                 }
             }

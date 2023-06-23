@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.module.modules;
@@ -10,17 +13,16 @@ import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.settings.NumberSetting;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import org.lwjgl.glfw.GLFW;
 
 public class Fly extends Module {
     public final NumberSetting speed = new NumberSetting("Speed", "How fast to fly.", 3, 0.1, 10, 0.1);
+    private int antiKickTimer = 0;
 
     public Fly() {
         super("Fly", "Allows you to fly.", GLFW.GLFW_KEY_F, Category.MOVEMENT);
         this.addSettings(speed);
     }
-    private int antiKickTimer = 0;
 
     @Override
     public void onDisable() {

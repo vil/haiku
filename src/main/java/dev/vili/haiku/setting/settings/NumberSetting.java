@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.setting.settings;
@@ -29,6 +32,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the value of the setting.
+     *
      * @param value value to set
      */
     public void setValue(double value) {
@@ -38,6 +42,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Increments the value of the setting.
+     *
      * @param positive whether to increment positively or negatively
      */
     public void increment(boolean positive) {
@@ -53,6 +58,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the minimum value of the setting.
+     *
      * @param minimum minimum value to set
      */
     public void setMinimum(double minimum) {
@@ -68,6 +74,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the maximum value of the setting.
+     *
      * @param maximum maximum value to set
      */
     public void setMaximum(double maximum) {
@@ -83,6 +90,7 @@ public class NumberSetting extends Setting {
 
     /**
      * Sets the increment value of the setting.
+     *
      * @param increment increment value to set
      */
     public void setIncrement(double increment) {

@@ -1,27 +1,30 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.gui;
 
+import dev.vili.haiku.Haiku;
+import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.Setting;
 import dev.vili.haiku.setting.settings.*;
 import dev.vili.haiku.util.HaikuLogger;
-import imgui.flag.ImGuiTreeNodeFlags;
-import imgui.type.ImBoolean;
-import imgui.type.ImInt;
-import imgui.type.ImString;
-import net.minecraft.client.gui.screen.Screen;
-import dev.vili.haiku.Haiku;
-import dev.vili.haiku.module.Module;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
+import imgui.type.ImBoolean;
+import imgui.type.ImInt;
+import imgui.type.ImString;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
@@ -34,12 +37,12 @@ import java.util.HashMap;
  * One window, no tabs.
  */
 public class HaikuOneGui extends Screen {
-    MinecraftClient mc = MinecraftClient.getInstance();
+    private static final HashMap<Setting, Object> settingsMap = new HashMap<>();
+    private static boolean binding;
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
-    private static final HashMap<Setting, Object> settingsMap = new HashMap<>();
-    private static boolean binding;
+    MinecraftClient mc = MinecraftClient.getInstance();
 
     public HaikuOneGui() {
         super(Text.literal("Haiku"));
@@ -196,8 +199,7 @@ public class HaikuOneGui extends Screen {
                     ImGui.inputText(setting.getName(), new ImString(Arrays.toString(byteValue)));
                     stringSetting.setString(new String(byteValue));
                 }
-                default ->
-                        HaikuLogger.logger.warn("Unknown setting type: " + setting.getClass().getSimpleName());
+                default -> HaikuLogger.logger.warn("Unknown setting type: " + setting.getClass().getSimpleName());
             }
             if (ImGui.isItemHovered()) {
                 ImGui.setTooltip(setting.getDescription());

@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.mixin;
@@ -25,7 +28,7 @@ public class WorldRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void render_head(MatrixStack matrixStack, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer,
-                      LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo callback) {
+                             LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo callback) {
         RenderEvent.Post event = new RenderEvent.Post(tickDelta, matrixStack);
         Haiku.getInstance().getEventBus().post(event);
 

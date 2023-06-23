@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.command;
@@ -23,16 +26,27 @@ public abstract class Command {
 
     /**
      * Called when the command is executed
-     * @param args arguments passed
+     *
+     * @param args    arguments passed
      * @param command command name
      */
-    public void onCommand(String[] args, String command) {}
+    public void onCommand(String[] args, String command) {
+    }
 
     /**
      * Gets the command name
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Sets the command name
+     *
+     * @param name name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -43,10 +57,28 @@ public abstract class Command {
     }
 
     /**
+     * Sets the command description
+     *
+     * @param description description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Gets the command syntax
      */
     public String getSyntax() {
         return syntax;
+    }
+
+    /**
+     * Sets the command syntax
+     *
+     * @param syntax syntax to set
+     */
+    public void setSyntax(String syntax) {
+        this.syntax = syntax;
     }
 
     /**
@@ -57,31 +89,8 @@ public abstract class Command {
     }
 
     /**
-     * Sets the command name
-     * @param name name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Sets the command description
-     * @param description description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * Sets the command syntax
-     * @param syntax syntax to set
-     */
-    public void setSyntax(String syntax) {
-        this.syntax = syntax;
-    }
-
-    /**
      * Sets the command aliases
+     *
      * @param aliases aliases to set
      */
     public void setAliases(List<String> aliases) {

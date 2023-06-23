@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.module;
@@ -39,22 +42,12 @@ public abstract class Module {
     /**
      * Adds settings to the module.
      * Must be called in the constructor.
+     *
      * @param settings settings to add
      */
     public void addSettings(Setting... settings) {
         this.settings.addAll(Arrays.asList(settings));
         this.settings.sort(Comparator.comparingInt(s -> s == keyCode ? 1 : 0));
-    }
-
-    /**
-     * Module categories.
-     */
-    public enum Category {
-        COMBAT,
-        MOVEMENT,
-        RENDER,
-        PLAYER,
-        MISC
     }
 
     /**
@@ -94,11 +87,21 @@ public abstract class Module {
         return this.enabled;
     }
 
+    /**
+     * Sets the enabled state of the module.
+     *
+     * @param enabled enabled state to set
+     */
+    public void setEnabled(boolean enabled) {
+        if (this.enabled != enabled) {
+            toggle();
+        }
+    }
+
     /* -------- Getters -------- */
 
     /**
      * Gets the name of the module.
-     *
      */
     public String getName() {
         return this.name;
@@ -129,6 +132,7 @@ public abstract class Module {
 
     /**
      * Sets the key of the module.
+     *
      * @param key key to set
      */
     public void setKey(int key) {
@@ -136,12 +140,13 @@ public abstract class Module {
     }
 
     /**
-     * Sets the enabled state of the module.
-     * @param enabled enabled state to set
+     * Module categories.
      */
-    public void setEnabled(boolean enabled) {
-        if (this.enabled != enabled) {
-            toggle();
-        }
+    public enum Category {
+        COMBAT,
+        MOVEMENT,
+        RENDER,
+        PLAYER,
+        MISC
     }
 }

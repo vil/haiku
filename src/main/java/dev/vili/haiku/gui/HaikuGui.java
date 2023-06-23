@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.gui;
@@ -24,11 +27,11 @@ import net.minecraft.text.Text;
  * Uses ImGui, because its based.
  */
 public class HaikuGui extends Screen {
-    MinecraftClient mc = MinecraftClient.getInstance();
-    private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
-    private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     public static final ImFloat guiHeight = new ImFloat(1.0f);
     public static final ImFloat guiWidth = new ImFloat(1.0f);
+    private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
+    private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
+    MinecraftClient mc = MinecraftClient.getInstance();
 
     public HaikuGui() {
         super(Text.literal("Haiku"));
@@ -48,10 +51,11 @@ public class HaikuGui extends Screen {
 
     /**
      * Renders the gui.
+     *
      * @param context The context to render in
-     * @param mouseX The mouse x position
-     * @param mouseY The mouse y position
-     * @param delta The delta time
+     * @param mouseX  The mouse x position
+     * @param mouseY  The mouse y position
+     * @param delta   The delta time
      */
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {

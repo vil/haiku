@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.event.events;
@@ -17,6 +20,24 @@ public class RenderEvent extends Event {
     }
 
     /**
+     * Gets the partial ticks.
+     *
+     * @return partial ticks
+     */
+    public float getPartialTicks() {
+        return partialTicks;
+    }
+
+    /**
+     * Gets the matrix stack.
+     *
+     * @return matrix stack
+     */
+    public MatrixStack getMatrixStack() {
+        return matrixStack;
+    }
+
+    /**
      * Types of render events.
      */
     public static class Post extends RenderEvent {
@@ -29,24 +50,6 @@ public class RenderEvent extends Event {
         public Pre(float partialTicks, MatrixStack matrixStack) {
             super(partialTicks, matrixStack);
         }
-    }
-
-
-
-    /**
-     * Gets the partial ticks.
-     * @return
-     */
-    public float getPartialTicks() {
-        return partialTicks;
-    }
-
-    /**
-     * Gets the matrix stack.
-     * @return
-     */
-    public MatrixStack getMatrixStack() {
-        return matrixStack;
     }
 
 }

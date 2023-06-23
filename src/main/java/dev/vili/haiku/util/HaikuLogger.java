@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.util;
@@ -20,6 +23,7 @@ public class HaikuLogger {
 
     /**
      * Logs a message to the console or the chat.
+     *
      * @param s
      */
 
@@ -39,7 +43,8 @@ public class HaikuLogger {
 
     /**
      * Logs a warning to the console or the chat.
-      * @param s
+     *
+     * @param s
      */
 
     public static void warn(String s) {
@@ -58,6 +63,7 @@ public class HaikuLogger {
 
     /**
      * Logs an error to the console or the chat.
+     *
      * @param s
      */
 
@@ -77,6 +83,7 @@ public class HaikuLogger {
 
     /**
      * Logs a message to the console or the chat without the prefix.
+     *
      * @param s
      */
     public static void noPrefix(String s) {

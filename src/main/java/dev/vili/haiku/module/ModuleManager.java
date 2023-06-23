@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.module;
@@ -50,6 +53,7 @@ public class ModuleManager {
 
     /**
      * Gets the module by name.
+     *
      * @param name name of the module
      */
     public Module getModule(String name) {
@@ -58,6 +62,7 @@ public class ModuleManager {
 
     /**
      * Gets the modules state
+     *
      * @param name name of the module
      */
     public boolean isModuleEnabled(String name) {
@@ -67,6 +72,7 @@ public class ModuleManager {
 
     /**
      * Gets the modules by category.
+     *
      * @param category category of the module
      */
     public List<Module> getModulesByCategory(Module.Category category) {

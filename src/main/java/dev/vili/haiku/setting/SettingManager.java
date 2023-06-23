@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.setting;
@@ -24,8 +27,9 @@ public class SettingManager {
 
     /**
      * Gets settings by name.
+     *
      * @param module module to get settings from
-     * @param name name of setting
+     * @param name   name of setting
      */
     public Setting getSettingsByName(Module module, String name) {
         for (Setting setting : module.settings) {
@@ -38,6 +42,7 @@ public class SettingManager {
 
     /**
      * Gets settings by module.
+     *
      * @param module module to get settings from
      */
     public ArrayList<Setting> getSettingsByModule(Module module) {

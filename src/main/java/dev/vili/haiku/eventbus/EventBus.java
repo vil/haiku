@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.eventbus;
@@ -19,6 +22,7 @@ public class EventBus implements IEventBus {
 
     /**
      * Registers a object.
+     *
      * @param registerClass object to register
      */
     @Override
@@ -33,7 +37,8 @@ public class EventBus implements IEventBus {
                             (Class<? extends HaikuEvent>) method.getParameterTypes()[0];
 
                     Consumer<HaikuEvent> lambda = null;
-                    if (method.getDeclaredAnnotation(HaikuSubscribe.class).lambda()) lambda = getLambda(registerClass, method, event);
+                    if (method.getDeclaredAnnotation(HaikuSubscribe.class).lambda())
+                        lambda = getLambda(registerClass, method, event);
                     if (!listeners.containsKey(event)) listeners.put(event, new CopyOnWriteArrayList<>());
 
                     listeners.get(event).add(new Listener(registerClass, method, lambda));
@@ -42,6 +47,7 @@ public class EventBus implements IEventBus {
 
     /**
      * Unregisters a object.
+     *
      * @param registerClass object to unregister
      */
     @Override
@@ -51,6 +57,7 @@ public class EventBus implements IEventBus {
 
     /**
      * Posts an event.
+     *
      * @param event event to post
      */
     @Override
@@ -72,9 +79,10 @@ public class EventBus implements IEventBus {
 
     /**
      * Gets the lambda of the listener.
+     *
      * @param object object
      * @param method method
-     * @param event event
+     * @param event  event
      * @return event lambda
      */
     protected Consumer<HaikuEvent> getLambda(Object object, Method method, Class<? extends HaikuEvent> event) {

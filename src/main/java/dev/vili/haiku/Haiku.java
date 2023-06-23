@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku;
@@ -19,10 +22,10 @@ import net.minecraft.client.MinecraftClient;
  * Main class for haiku.
  */
 public class Haiku implements ModInitializer {
-    private static Haiku INSTANCE;
     public static final String MOD_NAME = "Haiku";
     public static final String MOD_VERSION = "1.0";
     public static final MinecraftClient mc = MinecraftClient.getInstance();
+    private static Haiku INSTANCE;
     private final EventBus EVENT_BUS = new EventBus();
     private final ModuleManager MODULE_MANAGER = new ModuleManager();
     private final CommandManager COMMAND_MANAGER = new CommandManager();
@@ -31,6 +34,13 @@ public class Haiku implements ModInitializer {
 
     public Haiku() {
         INSTANCE = this;
+    }
+
+    /**
+     * Gets the instance of Haiku.
+     */
+    public static Haiku getInstance() {
+        return INSTANCE;
     }
 
     /**
@@ -56,13 +66,6 @@ public class Haiku implements ModInitializer {
         EVENT_BUS.register(TPSUtil.INSTANCE);
         HaikuLogger.logger.info("Registered TickRateUtil!");
         HaikuLogger.logger.info(MOD_NAME + " v" + MOD_VERSION + " (phase 2) has initialized!");
-    }
-
-    /**
-     * Gets the instance of Haiku.
-     */
-    public static Haiku getInstance() {
-        return INSTANCE;
     }
 
     /**

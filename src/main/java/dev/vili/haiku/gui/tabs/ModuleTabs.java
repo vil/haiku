@@ -1,15 +1,17 @@
 /*
- * Copyright (c) 2023. Vili (https://vili.dev) - All rights reserved
+ * Copyright (c) 2023. Vili and contributors.
+ * This source code is subject to the terms of the GNU General Public
+ * License, version 3. If a copy of the GPL was not distributed with this
+ *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 package dev.vili.haiku.gui.tabs;
 
 import dev.vili.haiku.Haiku;
 import dev.vili.haiku.gui.HaikuGui;
+import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.Setting;
 import dev.vili.haiku.setting.settings.*;
-import dev.vili.haiku.setting.settings.KeybindSetting;
-import dev.vili.haiku.module.Module;
 import dev.vili.haiku.util.HaikuLogger;
 import imgui.ImGui;
 import imgui.flag.ImGuiConfigFlags;
@@ -19,6 +21,7 @@ import imgui.type.ImInt;
 import imgui.type.ImString;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
+
 import java.util.HashMap;
 
 public class ModuleTabs {
@@ -43,11 +46,15 @@ public class ModuleTabs {
 
             for (Setting setting : module.settings) {
                 switch (setting.getClass().getSimpleName()) {
-                    case "BooleanSetting" -> settingsMap.put(setting, new ImBoolean(((BooleanSetting) setting).isEnabled()));
-                    case "NumberSetting" -> settingsMap.put(setting, new float[]{(float) ((NumberSetting) setting).getValue()});
+                    case "BooleanSetting" ->
+                            settingsMap.put(setting, new ImBoolean(((BooleanSetting) setting).isEnabled()));
+                    case "NumberSetting" ->
+                            settingsMap.put(setting, new float[]{(float) ((NumberSetting) setting).getValue()});
                     case "ModeSetting" -> settingsMap.put(setting, new ImInt(((ModeSetting) setting).index));
-                    case "KeybindSetting" -> settingsMap.put(setting, new ImInt(((KeybindSetting) setting).getKeyCode()));
-                    case "StringSetting" -> settingsMap.put(setting, new ImString(((StringSetting) setting).getString()));
+                    case "KeybindSetting" ->
+                            settingsMap.put(setting, new ImInt(((KeybindSetting) setting).getKeyCode()));
+                    case "StringSetting" ->
+                            settingsMap.put(setting, new ImString(((StringSetting) setting).getString()));
                     default -> HaikuLogger.logger.warn("Unknown setting type: " + setting.getClass().getSimpleName());
                 }
             }

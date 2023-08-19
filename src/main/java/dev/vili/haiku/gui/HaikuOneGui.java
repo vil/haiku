@@ -44,7 +44,7 @@ public class HaikuOneGui extends Screen {
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
     private Module activeModule;
-    MinecraftClient mc = MinecraftClient.getInstance();
+    private final MinecraftClient mc = MinecraftClient.getInstance();
 
     public HaikuOneGui() {
         super(Text.literal("Haiku"));
@@ -121,7 +121,6 @@ public class HaikuOneGui extends Screen {
      */
     private void renderCategoryModules(Module.Category category) {
         for (Module module : Haiku.getInstance().getModuleManager().getModulesByCategory(category)) {
-            ImGui.separator();
             if (ImGui.collapsingHeader(module.getName(), ImGuiTreeNodeFlags.DefaultOpen)) {
                 ImGui.indent();
                 renderModule(module);

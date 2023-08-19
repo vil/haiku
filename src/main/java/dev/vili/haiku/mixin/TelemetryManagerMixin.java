@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TelemetryManager.class)
 public class TelemetryManagerMixin {
 
-    /*
+    /**
      * Blocks telemetry from being sent to Mojang.
      */
     @Inject(at = @At("HEAD"), method = "getSender()Lnet/minecraft/client/util/telemetry/TelemetrySender;", cancellable = true)

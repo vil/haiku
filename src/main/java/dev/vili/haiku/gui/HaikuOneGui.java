@@ -44,6 +44,7 @@ public class HaikuOneGui extends Screen {
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
     private Module activeModule;
+    private Module.Category selectedCategory;
     private final MinecraftClient mc = MinecraftClient.getInstance();
 
     public HaikuOneGui() {
@@ -78,37 +79,36 @@ public class HaikuOneGui extends Screen {
         ImGui.newFrame();
 
         // Settings
-        // Add input typing
         ImGui.getIO().addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);
-
-        // Styling
         ImGui.getIO().setConfigWindowsMoveFromTitleBarOnly(true);
-        ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 255, 255, 255, 125);
+        ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 0, 0, 0, 255);
 
         // Window
-        ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove);
+        ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " ~~Made by Vili", ImGuiWindowFlags.NoResize);
         ImGui.setWindowSize(800, 600);
-        ImGui.text("Welcome to Haiku!");
-        ImGui.separator();
-        ImGui.text("Haiku v" + Haiku.MOD_VERSION);
-        ImGui.text("Minecraft " + SharedConstants.getGameVersion().getName());
-        ImGui.text("Cmd prefix: " + Haiku.getInstance().getCommandManager().prefix);
-        ImGui.separator();
-        ImGui.text("vili.dev");
+        ImGui.text("Minecraft " + SharedConstants.getGameVersion().getName() + " (" + SharedConstants.getGameVersion().getId() + ")" + " | " + mc.getSession().getUsername());
+        ImGui.text("FPS: " + mc.fpsDebugString.split(" ")[0]);
 
-        // Categories
+        // Sidebar with module categories
+        ImGui.beginChild("Categories", 200, 0, true);
+
         for (Module.Category category : Module.Category.values()) {
-            ImGui.separator();
-            if (ImGui.collapsingHeader(category.name(), ImGuiTreeNodeFlags.DefaultOpen)) {
-                ImGui.indent();
-                renderCategoryModules(category);
-                ImGui.unindent();
+            if (ImGui.selectable(category.name(), category == selectedCategory)) {
+                selectedCategory = category;
             }
         }
 
-        ImGui.end();
+        ImGui.endChild();
 
-        // Render
+        // Main portion displaying modules for the selected category
+        ImGui.sameLine();
+        ImGui.beginChild("Modules");
+
+        renderCategoryModules(selectedCategory);
+
+        ImGui.endChild();
+
+        ImGui.end();
         ImGui.render();
         implGl3.renderDrawData(ImGui.getDrawData());
         super.render(context, mouseX, mouseY, delta);

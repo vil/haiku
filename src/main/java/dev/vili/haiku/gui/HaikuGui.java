@@ -31,7 +31,7 @@ public class HaikuGui extends Screen {
     public static final ImFloat guiWidth = new ImFloat(1.0f);
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
-    MinecraftClient mc = MinecraftClient.getInstance();
+    private final MinecraftClient mc = MinecraftClient.getInstance();
 
     public HaikuGui() {
         super(Text.literal("Haiku"));
@@ -69,10 +69,10 @@ public class HaikuGui extends Screen {
 
         // Styling
         ImGui.getIO().setConfigWindowsMoveFromTitleBarOnly(true);
-        ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 255, 255, 255, 125);
+        ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 0, 0, 0, 255);
 
         // Window
-        if (ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " | Info tab", ImGuiWindowFlags.NoResize)) {
+        if (ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " ~~Made by Vili", ImGuiWindowFlags.NoResize)) {
             ImGui.setWindowSize(250, 120);
             ImGui.text("Welcome to Haiku!");
             ImGui.separator();
@@ -86,9 +86,6 @@ public class HaikuGui extends Screen {
 
             // Set the gui scale.
             ImGui.setWindowSize(250 * guiWidth.get(), 120 * guiHeight.get());
-
-            ImGui.separator();
-            ImGui.text("vili.dev");
 
             // Render module tabs
             ModuleTabs.render();

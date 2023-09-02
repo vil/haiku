@@ -8,6 +8,7 @@
 package dev.vili.haiku.gui;
 
 import dev.vili.haiku.Haiku;
+import dev.vili.haiku.gui.tabs.LogsTab;
 import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.Setting;
 import dev.vili.haiku.setting.settings.*;
@@ -108,9 +109,20 @@ public class HaikuOneGui extends Screen {
 
         ImGui.endChild();
 
+        // Render log tab
+        LogsTab.render();
+
+        // End window
         ImGui.end();
+
+        // Render
         ImGui.render();
         implGl3.renderDrawData(ImGui.getDrawData());
+
+        // Draw info on the bottom right of the screen
+        context.drawTextWithShadow(textRenderer, "Enable debug to see logs tab.",
+                width - textRenderer.getWidth("Enable debug to see logs tab.") - 2, height - textRenderer.fontHeight - 2, 0xFFFFFFFF);
+
         super.render(context, mouseX, mouseY, delta);
     }
 

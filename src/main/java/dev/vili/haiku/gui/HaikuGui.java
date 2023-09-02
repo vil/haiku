@@ -8,6 +8,7 @@
 package dev.vili.haiku.gui;
 
 import dev.vili.haiku.Haiku;
+import dev.vili.haiku.gui.tabs.LogsTab;
 import dev.vili.haiku.gui.tabs.ModuleTabs;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
@@ -15,10 +16,13 @@ import imgui.flag.ImGuiConfigFlags;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
+import imgui.type.ImBoolean;
 import imgui.type.ImFloat;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
@@ -89,6 +93,8 @@ public class HaikuGui extends Screen {
 
             // Render module tabs
             ModuleTabs.render();
+            // Render log tab
+            LogsTab.render();
         }
 
         // End window
@@ -97,6 +103,11 @@ public class HaikuGui extends Screen {
         // Render
         ImGui.render();
         implGl3.renderDrawData(ImGui.getDrawData());
+
+        // Draw info on the bottom right of the screen
+        context.drawTextWithShadow(textRenderer, "Enable debug to see logs tab.",
+                width - textRenderer.getWidth("Enable debug to see logs tab.") - 2, height - textRenderer.fontHeight - 2, 0xFFFFFFFF);
+
         super.render(context, mouseX, mouseY, delta);
     }
 

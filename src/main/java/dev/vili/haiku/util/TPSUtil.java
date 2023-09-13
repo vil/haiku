@@ -36,6 +36,7 @@ public class TPSUtil {
      * @return ticks
      */
     public double getTPS() {
-        return ticks;
+        // Return TPS with 2 decimal places
+        return Math.round(ticks * 100d) / 100d;
     }
 }

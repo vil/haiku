@@ -116,7 +116,6 @@ public class HaikuGui extends Screen {
      */
     @Override
     public boolean shouldCloseOnEsc() {
-        Haiku.getInstance().getModuleManager().getModule("Gui").setEnabled(false);
         return true;
     }
 
@@ -126,7 +125,6 @@ public class HaikuGui extends Screen {
     @Override
     public void close() {
         mc.setScreen(null);
-        Haiku.getInstance().getModuleManager().getModule("Gui").setEnabled(false);
         super.close();
     }
 }

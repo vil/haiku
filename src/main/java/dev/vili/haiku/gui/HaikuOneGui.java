@@ -85,32 +85,34 @@ public class HaikuOneGui extends Screen {
         ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 0, 0, 0, 255);
 
         // Window
-        ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " ~~Made by Vili", ImGuiWindowFlags.NoResize);
-        ImGui.setWindowSize(800, 600);
-        ImGui.text("Minecraft " + SharedConstants.getGameVersion().getName() + " (" + SharedConstants.getGameVersion().getId() + ")" + " | " + mc.getSession().getUsername());
-        ImGui.text("FPS: " + mc.fpsDebugString.split(" ")[0]);
+        if (ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " ~~Made by Vili", ImGuiWindowFlags.NoResize)) {
+            ImGui.setWindowSize(800, 600);
+            ImGui.text("Minecraft " + SharedConstants.getGameVersion().getName() + " (" + SharedConstants.getGameVersion().getId() + ")" + " | " + mc.getSession().getUsername());
+            ImGui.text("FPS: " + mc.fpsDebugString.split(" ")[0]);
 
-        // Sidebar with module categories
-        ImGui.beginChild("Categories", 200, 0, true);
+            // Sidebar with module categories
+            ImGui.beginChild("Categories", 200, 0, true);
 
-        for (Module.Category category : Module.Category.values()) {
-            if (ImGui.selectable(category.name(), category == selectedCategory)) {
-                selectedCategory = category;
+            for (Module.Category category : Module.Category.values()) {
+                if (ImGui.selectable(category.name(), category == selectedCategory)) {
+                    selectedCategory = category;
+                }
             }
+
+
+            ImGui.endChild();
+
+            // Main portion displaying modules for the selected category
+            ImGui.sameLine();
+            ImGui.beginChild("Modules");
+
+            renderCategoryModules(selectedCategory);
+
+            ImGui.endChild();
+
+            // Render log tab
+            LogsTab.render();
         }
-
-        ImGui.endChild();
-
-        // Main portion displaying modules for the selected category
-        ImGui.sameLine();
-        ImGui.beginChild("Modules");
-
-        renderCategoryModules(selectedCategory);
-
-        ImGui.endChild();
-
-        // Render log tab
-        LogsTab.render();
 
         // End window
         ImGui.end();
@@ -228,7 +230,6 @@ public class HaikuOneGui extends Screen {
      */
     @Override
     public boolean shouldCloseOnEsc() {
-        Haiku.getInstance().getModuleManager().getModule("OneGui").setEnabled(false);
         return true;
     }
 
@@ -238,7 +239,6 @@ public class HaikuOneGui extends Screen {
     @Override
     public void close() {
         mc.setScreen(null);
-        Haiku.getInstance().getModuleManager().getModule("OneGui").setEnabled(false);
         super.close();
     }
 }

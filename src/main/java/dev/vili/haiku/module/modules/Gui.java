@@ -18,12 +18,8 @@ public class Gui extends Module {
     }
 
     @Override
-    public void onEnable() {
+    public void toggle() {
         mc.setScreen(new HaikuGui());
     }
 
-    @Override
-    public void onDisable() {
-        mc.setScreen(null);
-    }
 }

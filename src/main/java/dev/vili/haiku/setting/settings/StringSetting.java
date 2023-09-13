@@ -9,6 +9,7 @@ package dev.vili.haiku.setting.settings;
 
 import dev.vili.haiku.setting.Setting;
 
+/* TODO make it work */
 public class StringSetting extends Setting {
     public String string;
 

@@ -9,6 +9,7 @@ package dev.vili.haiku.gui.tabs;
 
 import dev.vili.haiku.Haiku;
 import dev.vili.haiku.gui.HaikuGui;
+import dev.vili.haiku.gui.HaikuOneGui;
 import dev.vili.haiku.module.Module;
 import dev.vili.haiku.setting.Setting;
 import dev.vili.haiku.setting.settings.*;

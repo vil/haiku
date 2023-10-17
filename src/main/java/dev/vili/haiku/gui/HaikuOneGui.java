@@ -40,12 +40,12 @@ import java.util.HashMap;
  */
 public class HaikuOneGui extends Screen {
     private static final HashMap<Setting, Object> settingsMap = new HashMap<>();
+    private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
+    private Module activeModule = null;
+    private Module.Category selectedCategory;
     private static boolean binding;
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
-    private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
-    private Module activeModule;
-    private Module.Category selectedCategory;
     private final MinecraftClient mc = MinecraftClient.getInstance();
 
     public HaikuOneGui() {
@@ -149,9 +149,7 @@ public class HaikuOneGui extends Screen {
      * @param module The module to render
      */
     private void renderModule(Module module) {
-        ImBoolean enabled = enabledMap.getOrDefault(module, new ImBoolean(module.isEnabled()));
-        enabledMap.put(module, enabled);
-
+        ImBoolean enabled = enabledMap.computeIfAbsent(module, m -> new ImBoolean(module.isEnabled()));
         ImGui.checkbox("Enabled", enabled);
         module.setEnabled(enabled.get());
 

@@ -28,7 +28,7 @@ public class LogsTab {
      * Renders the game logs tab.
      */
     public static void render() {
-        if (!Haiku.mc.options.debugEnabled) return; // Render only if debug mode is enabled
+        if (!Haiku.mc.getDebugHud().shouldShowDebugHud()) return; // Render only if debug mode is enabled
 
         ImGui.setWindowSize(600, 400);
         ImGui.begin("Logs", new ImBoolean(true), ImGuiWindowFlags.NoCollapse);

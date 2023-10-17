@@ -29,7 +29,7 @@ public class Hud extends Module {
     @HaikuSubscribe
     public void onRender(RenderInGameHudEvent event) {
         if (mc.world == null || mc.player == null) return;
-        if (mc.options.debugEnabled) return;
+        if (mc.getDebugHud().shouldShowDebugHud()) return;
 
         if (watermark.isEnabled()) {
             event.getContext().drawTextWithShadow(mc.textRenderer, Haiku.MOD_NAME + " v" + Haiku.MOD_VERSION,

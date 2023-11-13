@@ -2,7 +2,7 @@
     "configurations": [
         {
             "type": "gradle",
-            "name": "Gradle configuration",
+            "name": "Gradlew runClient",
             "tasks": ["runClient"],
         },
         

@@ -11,6 +11,7 @@
     "InGameHudMixin",
     "KeyboardMixin",
     "MinecraftClientMixin",
+    "ScreenMixin",
     "TelemetryManagerMixin",
     "WorldRendererMixin"
   ],

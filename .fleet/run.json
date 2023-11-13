@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "gradle",
+            "name": "Gradle configuration",
+            "tasks": ["runClient"],
+        },
+        
+    ]
+}

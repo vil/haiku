@@ -5,6 +5,10 @@
             "name": "Gradlew runClient",
             "tasks": ["runClient"],
         },
-        
+        {
+            "type": "gradle",
+            "name": "Gradlew build",
+            "tasks": ["build"],
+        },
     ]
 }

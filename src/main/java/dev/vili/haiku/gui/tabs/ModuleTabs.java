@@ -16,6 +16,7 @@ import dev.vili.haiku.setting.settings.*;
 import dev.vili.haiku.util.HaikuLogger;
 import imgui.ImGui;
 import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.ImGuiInputTextFlags;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
@@ -37,8 +38,6 @@ public class ModuleTabs {
      * Renders the module tabs.
      */
     public static void render() {
-        ImGui.getIO().addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);
-
         for (Module module : Haiku.getInstance().getModuleManager().modules) {
             showSettingsMap.put(module, showSettingsMap.getOrDefault(module, false));
             enabledMap.put(module, new ImBoolean(module.isEnabled()));
@@ -133,6 +132,13 @@ public class ModuleTabs {
                         ImGui.combo(setting.name, (ImInt) settingsMap.get(setting), temp);
                         if (((ImInt) settingsMap.get(setting)).get() != ((ModeSetting) setting).modes.indexOf(((ModeSetting) setting).getMode())) {
                             ((ModeSetting) setting).setMode(((ModeSetting) setting).modes.get(((ImInt) settingsMap.get(setting)).get()));
+                        }
+                    }
+                    case "StringSetting" -> {
+                        ImGui.inputText(setting.name, (ImString) settingsMap.get(setting), ImGuiInputTextFlags.CallbackResize);
+                        String temp = ((ImString) settingsMap.get(setting)).get();
+                        if (!temp.equals(((StringSetting) setting).getString())) {
+                            ((StringSetting) setting).setString(temp);
                         }
                     }
                     case "KeybindSetting" -> {

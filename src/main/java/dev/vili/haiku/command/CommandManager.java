@@ -8,6 +8,7 @@
 package dev.vili.haiku.command;
 
 import dev.vili.haiku.command.commands.HelpCmd;
+import dev.vili.haiku.command.commands.ToggleCmd;
 import dev.vili.haiku.util.HaikuLogger;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class CommandManager {
 
         /* Add commands here */
         commands.add(new HelpCmd());
+        commands.add(new ToggleCmd());
     }
 
     /**

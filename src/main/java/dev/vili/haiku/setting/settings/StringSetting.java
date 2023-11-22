@@ -8,29 +8,38 @@
 package dev.vili.haiku.setting.settings;
 
 import dev.vili.haiku.setting.Setting;
+import imgui.ImGui;
+import imgui.type.ImString;
 
 /* TODO make it work */
 public class StringSetting extends Setting {
-    public String string;
+    public ImString imString;
 
-    public StringSetting(String name, String description, String string) {
+    public StringSetting(String name, String description) {
         super(name, description);
-        this.string = string;
+        this.imString = new ImString();
     }
 
     /**
      * Gets the value of the setting.
      */
     public String getString() {
-        return string;
+        return imString.get();
     }
 
     /**
      * Sets the value of the setting.
      *
-     * @param string value to set
+     * @param value value to set
      */
-    public void setString(String string) {
-        this.string = string;
+    public void setString(String value) {
+        imString.set(value);
+    }
+
+    /**
+     * Display the setting using ImGui.
+     */
+    public void display() {
+        ImGui.inputText(name, imString);
     }
 }

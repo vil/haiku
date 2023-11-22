@@ -14,10 +14,7 @@ import dev.vili.haiku.setting.Setting;
 import dev.vili.haiku.setting.settings.*;
 import dev.vili.haiku.util.HaikuLogger;
 import imgui.ImGui;
-import imgui.flag.ImGuiCol;
-import imgui.flag.ImGuiConfigFlags;
-import imgui.flag.ImGuiTreeNodeFlags;
-import imgui.flag.ImGuiWindowFlags;
+import imgui.flag.*;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import imgui.type.ImBoolean;
@@ -85,7 +82,7 @@ public class HaikuOneGui extends Screen {
         ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 0, 0, 0, 255);
 
         // Window
-        if (ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " ~~Made by Vili", ImGuiWindowFlags.NoResize)) {
+        if (ImGui.begin("OneGui", ImGuiWindowFlags.NoResize)) {
             ImGui.setWindowSize(800, 600);
             ImGui.text("Minecraft " + SharedConstants.getGameVersion().getName() + " (" + SharedConstants.getGameVersion().getId() + ")" + " | " + mc.getSession().getUsername());
             ImGui.text("FPS: " + mc.fpsDebugString.split(" ")[0]);
@@ -207,13 +204,15 @@ public class HaikuOneGui extends Screen {
                         }
                     }
                 }
+
                 case "StringSetting" -> {
                     StringSetting stringSetting = (StringSetting) setting;
                     ImString stringValue = (ImString) settingsMap.getOrDefault(setting, new ImString(stringSetting.getString()));
                     settingsMap.put(setting, stringValue);
-                    byte[] byteValue = stringValue.get().getBytes();
-                    ImGui.inputText(setting.getName(), new ImString(Arrays.toString(byteValue)));
-                    stringSetting.setString(new String(byteValue));
+                    ImGui.inputText(setting.getName(), stringValue);
+                    if (!stringValue.get().equals(stringSetting.getString())) {
+                        stringSetting.setString(stringValue.get());
+                    }
                 }
                 default -> HaikuLogger.logger.warn("Unknown setting type: " + setting.getClass().getSimpleName());
             }
@@ -237,6 +236,8 @@ public class HaikuOneGui extends Screen {
     @Override
     public void close() {
         mc.setScreen(null);
+        implGl3.dispose();
+        implGlfw.dispose();
         super.close();
     }
 }

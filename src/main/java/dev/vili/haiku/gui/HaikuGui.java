@@ -11,8 +11,10 @@ import dev.vili.haiku.Haiku;
 import dev.vili.haiku.gui.tabs.LogsTab;
 import dev.vili.haiku.gui.tabs.ModuleTabs;
 import imgui.ImGui;
+import imgui.callback.ImGuiInputTextCallback;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.ImGuiInputTextFlags;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
@@ -73,7 +75,7 @@ public class HaikuGui extends Screen {
         ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 0, 0, 0, 255);
 
         // Window
-        if (ImGui.begin(Haiku.MOD_NAME + " " + Haiku.MOD_VERSION + " ~~Made by Vili", ImGuiWindowFlags.NoResize)) {
+        if (ImGui.begin("Gui", ImGuiWindowFlags.NoResize)) {
             ImGui.setWindowSize(250, 120);
             ImGui.text("Welcome to Haiku!");
             ImGui.separator();
@@ -122,6 +124,8 @@ public class HaikuGui extends Screen {
     @Override
     public void close() {
         mc.setScreen(null);
+        implGl3.dispose();
+        implGlfw.dispose();
         super.close();
     }
 }

@@ -61,6 +61,8 @@ public class Haiku implements ModInitializer {
 
     /**
      * Called when Minecraft has finished loading.
+     *
+     * @see dev.vili.haiku.mixin.MinecraftClientMixin
      */
     public void postInitialize() {
         EVENT_BUS.register(TPSUtil.INSTANCE);

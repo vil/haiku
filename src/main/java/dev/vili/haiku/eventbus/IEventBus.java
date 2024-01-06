@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Vili and contributors.
+ * Copyright (c) 2024. Vili and contributors.
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
  *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -9,12 +9,12 @@ package dev.vili.haiku.eventbus;
 
 /**
  * The IEventBus interface.
- *
+ * <p>
  * This interface represents a channel for passing event messages between the components of an application. Implementations of this
  * interface provide methods for managing (registering and unregistering) event subscriber objects and for posting events to the bus.
- *
+ * <p>
  * WARNING: This is a public top-level interface, please handle with caution to prevent incorrect mutations or unwanted side effects.
- *
+ * <p>
  * Future maintainers should ensure that all implementations of this interface adhere to the proper behavior of the data flow.
  */
 public interface IEventBus {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Vili and contributors.
+ * Copyright (c) 2024. Vili and contributors.
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
  *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -25,7 +25,7 @@ public class LogsTab {
     private static final File MINECRAFT_LOG_FILE = new File(MinecraftClient.getInstance().runDirectory, "logs/latest.log");
 
     /**
-     * Renders the game logs tab.
+     * Renders the game logs tab only if F3 debug menu is enabled.
      */
     public static void render() {
         if (!Haiku.mc.getDebugHud().shouldShowDebugHud()) return; // Render only if debug mode is enabled
@@ -52,6 +52,11 @@ public class LogsTab {
         ImGui.end();
     }
 
+    /**
+     * Gets the current system time in the HH:mm:ss format.
+     *
+     * @return formatted time (HH:mm:ss).
+     */
     private static String getLocalTime() {
         return new SimpleDateFormat("HH:mm:ss").format(new Date());
     }

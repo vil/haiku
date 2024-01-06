@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Vili and contributors.
+ * Copyright (c) 2024. Vili and contributors.
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
  *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -26,7 +26,7 @@ public class EventBus implements IEventBus {
      * It iterates over all the methods of an object and filters those methods that are annotated with `HaikuSubscribe`, accepting only one parameter.
      * For each matched method, the access to that method is set (if it's not accessible), it retrieves the type of the first parameter
      * (which is expected to extend the HaikuEvent class),
-     * it checks if the HaikuSubscribe annotation includes a Lambda expression and it extracts it via the `getLambda` method,
+     * it checks if the HaikuSubscribe annotation includes a Lambda expression, and it extracts it via the `getLambda` method,
      * and finally constructs a Listener object which includes the registered class, the method and the optional Lambda expression if exists.
      * If the event type related to the matched method is not already available in the listeners map, an empty list is created and added to it, and then this new listener is added to the list of the corresponding event.
      */

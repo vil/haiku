@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Vili and contributors.
+ * Copyright (c) 2024. Vili and contributors.
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
  *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -27,6 +27,16 @@ public abstract class Module {
     public boolean enabled;
     public List<Setting> settings = new ArrayList<>();
 
+    /**
+     * Module constructor.
+     *
+     * @param name name of the module.
+     * @param description description of the module.
+     * @param key GLFW keybinding.
+     * @param category module category.
+     *
+     * @implNote addSettings() must be called in the constructor, otherwise the module will not have its settings.
+     */
     public Module(String name, String description, int key, Category category) {
         super();
         this.name = name;

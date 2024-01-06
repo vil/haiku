@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Vili and contributors.
+ * Copyright (c) 2024. Vili and contributors.
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
  *  file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -40,18 +40,31 @@ public class ConfigManager {
                 file.createNewFile();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            HaikuLogger.logger.error(e.getMessage());
         }
     }
 
+    /**
+     * Gets the saved config file.
+     *
+     * @return config file.
+     */
     public File getFile() {
         return file;
     }
 
+    /**
+     * Gets the main directory.
+     *
+     * @return main dir.
+     */
     public File getMainDirectory() {
         return mainDirectory;
     }
 
+    /**
+     * Saves the config file by processing the settings and storing them into an XML file (config.xml by default).
+     */
     public void save() {
         try {
             HaikuLogger.logger.info("Saving config...");
@@ -63,6 +76,9 @@ public class ConfigManager {
         }
     }
 
+    /**
+     * Loads the settings and other data from the config file.
+     */
     public void load() {
         try {
             HaikuLogger.logger.info("Loading config...");
@@ -74,6 +90,12 @@ public class ConfigManager {
         }
     }
 
+    /**
+     * Processes the config.
+     *
+     * @param properties setting property.
+     * @param save should the settings be saved or loaded (true for saving, false for loading).
+     */
     private void processSettings(Properties properties, boolean save) {
         for (Module module : Haiku.getInstance().getModuleManager().getModules()) {
             String propertyName = module.getName() + ".enabled";
@@ -89,6 +111,14 @@ public class ConfigManager {
         }
     }
 
+    /**
+     * Processes each modules settings.
+     *
+     * @param save should the setting be saved or loaded (true for saving, false for loading).
+     * @param properties setting properties.
+     * @param setting name of the setting.
+     * @param module module of the settings.
+     */
     private void processEachSetting(boolean save, Properties properties, Setting setting, Module module) {
         String className = setting.getClass().getSimpleName();
         switch (className) {
@@ -111,6 +141,8 @@ public class ConfigManager {
                 HaikuLogger.logger.error("Unknown setting type: " + className);
         }
     }
+
+    // Processing of each setting.
 
     private void processBooleanSetting(boolean save, Properties properties, BooleanSetting setting, Module module) {
         String propertyName = module.getName() + "." + setting.getName();

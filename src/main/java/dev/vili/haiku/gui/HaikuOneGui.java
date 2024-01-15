@@ -28,7 +28,6 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -37,13 +36,13 @@ import java.util.HashMap;
  */
 public class HaikuOneGui extends Screen {
     private static final HashMap<Setting, Object> settingsMap = new HashMap<>();
-    private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
-    private Module activeModule = null;
-    private Module.Category selectedCategory;
     private static boolean binding;
+    private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     private final MinecraftClient mc = MinecraftClient.getInstance();
+    private Module activeModule = null;
+    private Module.Category selectedCategory;
 
     public HaikuOneGui() {
         super(Text.literal("Haiku"));
@@ -204,13 +203,12 @@ public class HaikuOneGui extends Screen {
                         }
                     }
                 }
-
                 case "StringSetting" -> {
                     StringSetting stringSetting = (StringSetting) setting;
                     ImString stringValue = (ImString) settingsMap.getOrDefault(setting, new ImString(stringSetting.getString()));
-                    settingsMap.put(setting, stringValue);
-                    ImGui.inputText(setting.getName(), stringValue);
-                    if (!stringValue.get().equals(stringSetting.getString())) {
+
+                    if (ImGui.inputText(setting.getName(), stringValue, ImGuiInputTextFlags.CallbackResize)) {
+                        settingsMap.put(setting, stringValue);
                         stringSetting.setString(stringValue.get());
                     }
                 }

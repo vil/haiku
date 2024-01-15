@@ -15,6 +15,6 @@ public class TelemetryManagerMixin {
      */
     @Inject(at = @At("HEAD"), method = "getSender()Lnet/minecraft/client/session/telemetry/TelemetrySender;", cancellable = true)
     private void onGetSender(CallbackInfoReturnable<TelemetrySender> cir) {
-		cir.setReturnValue(TelemetrySender.NOOP);
-	}
+        cir.setReturnValue(TelemetrySender.NOOP);
+    }
 }

@@ -10,8 +10,8 @@ Feel free to use this for your own client. Also feel free to make pull requests 
 ## Images
 <details>
     <summary>click here</summary>
-    <img src="img/gui.png" alt="gui">
-    <img src="img/onegui-v2.png" alt="onegui">
+    <img src="img/showcase1.png" alt="Showcase 1">
+    <img src="img/showcase2.png" alt="Showcase 2">
 </details>  
 
 ## Installation
@@ -28,6 +28,7 @@ Feel free to use this for your own client. Also feel free to make pull requests 
 - [x] settings and a setting manager.
 - [x] a gui for the client.
 - [x] events and a eventbus.
+- [x] rendering utility for making esp, tracer, etc.
 - [x] it just works.
 
 It has all the essentials for a client.

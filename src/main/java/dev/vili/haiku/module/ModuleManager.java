@@ -27,8 +27,9 @@ public class ModuleManager {
         modules.add(new Dummy());
         modules.add(new Fly());
         modules.add(new Gui());
-        modules.add(new OneGui());
         modules.add(new Hud());
+        modules.add(new OneGui());
+        modules.add(new RenderTest());
         modules.add(new Sprint());
     }
 

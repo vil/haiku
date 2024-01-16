@@ -182,7 +182,7 @@ public class HaikuOneGui extends Screen {
                 }
                 case "KeybindSetting" -> {
                     KeybindSetting keybindSetting = (KeybindSetting) setting;
-                    if (binding && activeModule == module) { // Check if the module is active for keybind changes
+                    if (binding && activeModule == module) { // Check if the module is active for keybinding changes
                         ImGui.text("Press a key to bind");
                         for (int i = 0; i < 512; i++) {
                             if (ImGui.isKeyPressed(i)) {
@@ -203,6 +203,7 @@ public class HaikuOneGui extends Screen {
                         }
                     }
                 }
+                // TODO This still doesn't work properly. If gui is reopened, it doesn't allow typing or interacting with it.
                 case "StringSetting" -> {
                     StringSetting stringSetting = (StringSetting) setting;
                     ImString stringValue = (ImString) settingsMap.getOrDefault(setting, new ImString(stringSetting.getString()));

@@ -10,7 +10,7 @@ package dev.vili.haiku.gui;
 import dev.vili.haiku.Haiku;
 import dev.vili.haiku.gui.tabs.LogsTab;
 import dev.vili.haiku.gui.tabs.ModuleTabs;
-import dev.vili.haiku.gui.tabs.QuizmoTab;
+import dev.vili.haiku.gui.tabs.GizmoTab;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiConfigFlags;
@@ -32,7 +32,7 @@ import net.minecraft.text.Text;
 public class HaikuGui extends Screen {
     public static final ImFloat guiHeight = new ImFloat(1.0f);
     public static final ImFloat guiWidth = new ImFloat(1.0f);
-    public static final ImBoolean showQuizmo = new ImBoolean(false);
+    public static final ImBoolean showGizmo = new ImBoolean(false);
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     private final MinecraftClient mc = MinecraftClient.getInstance();
@@ -87,7 +87,7 @@ public class HaikuGui extends Screen {
             // Sliders to scale the gui.
             ImGui.sliderFloat("Gui Height", guiHeight.getData(), 0.5f, 2.0f);
             ImGui.sliderFloat("Gui Width", guiWidth.getData(), 0.5f, 2.0f);
-            ImGui.checkbox("Show Quizmo", showQuizmo);
+            ImGui.checkbox("Show Gizmo", showGizmo);
 
             // Set the gui scale.
             ImGui.setWindowSize(250 * guiWidth.get(), 120 * guiHeight.get());
@@ -96,8 +96,8 @@ public class HaikuGui extends Screen {
             ModuleTabs.render();
             // Render log tab
             LogsTab.render();
-            // Render quizmo
-            if (showQuizmo.get()) QuizmoTab.render();
+            // Render gizmo
+            if (showGizmo.get()) GizmoTab.render();
         }
 
         // End window

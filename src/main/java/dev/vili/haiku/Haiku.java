@@ -13,7 +13,6 @@ import dev.vili.haiku.eventbus.EventBus;
 import dev.vili.haiku.module.ModuleManager;
 import dev.vili.haiku.setting.SettingManager;
 import dev.vili.haiku.util.HaikuLogger;
-import dev.vili.haiku.util.RenderUtil;
 import dev.vili.haiku.util.TPSUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;

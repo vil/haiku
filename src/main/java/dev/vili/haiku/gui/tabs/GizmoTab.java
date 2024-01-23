@@ -22,11 +22,11 @@ import java.util.Arrays;
 import static net.minecraft.client.util.InputUtil.*;
 
 /**
- * Example ImQuizmo
+ * Example ImGuizmo
  *
  * @see <a href="https://github.com/SpaiR/imgui-java/blob/main/example/src/main/java/ExampleImGuizmo.java">...</a>
  */
-public class QuizmoTab {
+public class GizmoTab {
 
     private static final int CAM_DISTANCE = 8;
     private static final float CAM_Y_ANGLE = 165.f / 180.f * (float) Math.PI;
@@ -100,7 +100,7 @@ public class QuizmoTab {
     public static void render() {
         ImGuizmo.beginFrame();
 
-        if (ImGui.begin("Haiku Guizmo Command Window")) {
+        if (ImGui.begin("Haiku Gizmo Command Window")) {
             ImGui.separator();
 
             if (firstFrame) {

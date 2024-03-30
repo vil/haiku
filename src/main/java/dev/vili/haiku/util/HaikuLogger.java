@@ -7,6 +7,7 @@
 
 package dev.vili.haiku.util;
 
+import dev.vili.haiku.Haiku;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -99,6 +100,6 @@ public class HaikuLogger {
     }
 
     private static MutableText getText(int color) {
-        return Text.literal("haiku$~ ").styled(s -> s.withColor(color));
+        return Text.literal(Formatting.GREEN + Haiku.mc.getSession().getUsername() + "@" + Haiku.MOD_NAME + Formatting.BLUE + " ~ $  ").styled(s -> s.withColor(color));
     }
 }

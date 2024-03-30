@@ -131,6 +131,8 @@ public class HaikuOneGui extends Screen {
      */
     private void renderCategoryModules(Module.Category category) {
         for (Module module : Haiku.getInstance().getModuleManager().getModulesByCategory(category)) {
+            enabledMap.put(module, new ImBoolean(module.isEnabled()));
+
             if (ImGui.collapsingHeader(module.getName(), ImGuiTreeNodeFlags.CollapsingHeader)) {
                 ImGui.indent();
                 renderModule(module);
@@ -148,9 +150,10 @@ public class HaikuOneGui extends Screen {
      * @param module The module to render
      */
     private void renderModule(Module module) {
-        ImBoolean enabled = enabledMap.computeIfAbsent(module, m -> new ImBoolean(m.isEnabled()));
-        ImGui.checkbox("Enabled", enabled);
-        module.setEnabled(enabled.get());
+        ImGui.checkbox("Toggle " + module.getName(), enabledMap.get(module));
+        if (enabledMap.get(module).get() != module.isEnabled()) {
+            module.toggle();
+        }
 
         for (Setting setting : module.settings) {
             switch (setting.getClass().getSimpleName()) {

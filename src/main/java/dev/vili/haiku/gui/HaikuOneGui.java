@@ -36,11 +36,11 @@ import java.util.HashMap;
  */
 public class HaikuOneGui extends Screen {
     private static final HashMap<Setting, Object> settingsMap = new HashMap<>();
-    private static boolean binding;
     private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
     private final MinecraftClient mc = MinecraftClient.getInstance();
+    private static boolean binding;
     private Module activeModule = null;
     private Module.Category selectedCategory;
 
@@ -131,10 +131,13 @@ public class HaikuOneGui extends Screen {
      */
     private void renderCategoryModules(Module.Category category) {
         for (Module module : Haiku.getInstance().getModuleManager().getModulesByCategory(category)) {
-            if (ImGui.collapsingHeader(module.getName(), ImGuiTreeNodeFlags.DefaultOpen)) {
+            if (ImGui.collapsingHeader(module.getName(), ImGuiTreeNodeFlags.CollapsingHeader)) {
                 ImGui.indent();
                 renderModule(module);
                 ImGui.unindent();
+            }
+            if (ImGui.isItemHovered()) {
+                ImGui.setTooltip(module.getDescription());
             }
         }
     }
@@ -145,7 +148,7 @@ public class HaikuOneGui extends Screen {
      * @param module The module to render
      */
     private void renderModule(Module module) {
-        ImBoolean enabled = enabledMap.computeIfAbsent(module, m -> new ImBoolean(module.isEnabled()));
+        ImBoolean enabled = enabledMap.computeIfAbsent(module, m -> new ImBoolean(m.isEnabled()));
         ImGui.checkbox("Enabled", enabled);
         module.setEnabled(enabled.get());
 

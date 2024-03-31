@@ -34,7 +34,7 @@ Feel free to use this for your own client. Also feel free to make pull requests 
 It has all the essentials for a client.
 
 ## Need help?
-Open an issue or contact me via discord `v1li`.
+Open an issue or contact me via [discord](https://discord.com/users/224241396347961344).
 
 You can find all the ImGui guides and documentation [here](https://github.com/SpaiR/imgui-java) & Fabric guides and documentation [here](https://fabricmc.net/wiki/start).
 

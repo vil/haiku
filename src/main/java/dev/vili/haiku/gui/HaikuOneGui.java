@@ -35,6 +35,7 @@ import java.util.HashMap;
  * One window, no tabs.
  */
 public class HaikuOneGui extends Screen {
+    private static boolean isOpen = false;
     private static final HashMap<Setting, Object> settingsMap = new HashMap<>();
     private final HashMap<Module, ImBoolean> enabledMap = new HashMap<>();
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
@@ -240,6 +241,7 @@ public class HaikuOneGui extends Screen {
      */
     @Override
     public void close() {
+        HaikuOneGui.isOpen = false;
         mc.setScreen(null);
         implGl3.dispose();
         implGlfw.dispose();

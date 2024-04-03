@@ -30,6 +30,7 @@ import net.minecraft.text.Text;
  * Uses ImGui, because its based.
  */
 public class HaikuGui extends Screen {
+    private static boolean isOpen = false;
     public static final ImFloat guiHeight = new ImFloat(1.0f);
     public static final ImFloat guiWidth = new ImFloat(1.0f);
     public static final ImBoolean showGizmo = new ImBoolean(false);
@@ -127,6 +128,7 @@ public class HaikuGui extends Screen {
      */
     @Override
     public void close() {
+        HaikuGui.isOpen = false;
         mc.setScreen(null);
         implGl3.dispose();
         implGlfw.dispose();

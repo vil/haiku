@@ -7,6 +7,7 @@
 
 package dev.vili.haiku.module.modules;
 
+import dev.vili.haiku.gui.HaikuGui;
 import dev.vili.haiku.gui.HaikuOneGui;
 import dev.vili.haiku.module.Module;
 import org.lwjgl.glfw.GLFW;
@@ -18,7 +19,14 @@ public class OneGui extends Module {
 
     @Override
     public void toggle() {
-        mc.setScreen(new HaikuOneGui());
+        openGui();
+    }
+
+    public void openGui() {
+        if (!HaikuOneGui.isOpen && !HaikuGui.isOpen) {
+            mc.setScreen(new HaikuOneGui());
+            HaikuOneGui.isOpen = true;
+        }
     }
 
 }

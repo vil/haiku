@@ -21,10 +21,11 @@ public class Hud extends Module {
     public final StringSetting watermarkText = new StringSetting("Watermark Text", "The text of the watermark.");
     public final BooleanSetting arraylist = new BooleanSetting("Arraylist", "Renders the Haiku arraylist.", true);
     public final BooleanSetting ticks = new BooleanSetting("TPS", "Renders the ticks per second.", true);
+    public final BooleanSetting fps = new BooleanSetting("FPS", "Renders the frames per second.", true);
 
     public Hud() {
         super("Hud", "Renders the Haiku hud.", GLFW.GLFW_KEY_UNKNOWN, Category.RENDER);
-        this.addSettings(watermark, watermarkText, arraylist, ticks);
+        this.addSettings(watermark, watermarkText, arraylist, ticks, fps);
     }
 
     @HaikuSubscribe
@@ -32,9 +33,20 @@ public class Hud extends Module {
         if (mc.world == null || mc.player == null) return;
         if (mc.getDebugHud().shouldShowDebugHud()) return;
 
+        // TODO rewrite the whole hud thingy
+
         if (watermark.isEnabled()) {
             event.getContext().drawTextWithShadow(mc.textRenderer, watermarkText.getString() == null ? Haiku.MOD_NAME : watermarkText.getString() + " v" + Haiku.MOD_VERSION,
                     2, 2, 0xFFFFFF);
+        }
+
+        if (fps.isEnabled()) {
+            String fps = mc.fpsDebugString.split(" ")[0];
+            int x = 2;
+
+            if (watermark.isEnabled()) x = (watermarkText.getString().length() * 15);
+
+            event.getContext().drawTextWithShadow(mc.textRenderer, "(" + fps + " fps)", x, 2, 0xFFFFFF);
         }
 
         int screenWidth = mc.getWindow().getScaledWidth();

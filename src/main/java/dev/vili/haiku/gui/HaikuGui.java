@@ -44,6 +44,11 @@ public class HaikuGui extends Screen {
         ImGui.createContext();
         implGlfw.init(windowHandle, true);
         implGl3.init();
+
+        // Settings
+        ImGui.getIO().addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);
+        ImGui.getIO().setConfigWindowsMoveFromTitleBarOnly(true);
+        ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 0, 0, 0, 255);
     }
 
     /**
@@ -67,14 +72,6 @@ public class HaikuGui extends Screen {
         // Setup
         implGlfw.newFrame();
         ImGui.newFrame();
-
-        // Settings
-        // Add input typing
-        ImGui.getIO().addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);
-
-        // Styling
-        ImGui.getIO().setConfigWindowsMoveFromTitleBarOnly(true);
-        ImGui.getStyle().setColor(ImGuiCol.TitleBgActive, 0, 0, 0, 255);
 
         // Window
         if (ImGui.begin("Gui", ImGuiWindowFlags.NoResize)) {

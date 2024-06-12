@@ -22,6 +22,7 @@ import java.awt.*;
 
 /**
  * Rendering Util for Haiku.
+ * TODO fix this for 1.20.6
  */
 public class RenderUtil {
     public static final MinecraftClient mc = MinecraftClient.getInstance();
@@ -148,7 +149,7 @@ public class RenderUtil {
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         setup3D();
 
-        RenderSystem.setShaderColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        RenderSystem.setShaderColor(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
         RenderSystem.setShader(GameRenderer::getRenderTypeLinesProgram);
         RenderSystem.defaultBlendFunc();
 

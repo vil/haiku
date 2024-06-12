@@ -9,14 +9,19 @@ package dev.vili.haiku.event.events;
 
 import dev.vili.haiku.event.Event;
 import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix4f;
 
 public class RenderEvent extends Event {
     protected float partialTicks;
+    protected Matrix4f matrix4f;
+    protected Matrix4f matrix4f2;
     protected MatrixStack matrixStack;
 
-    public RenderEvent(float partialTicks, MatrixStack matrixStack) {
+    public RenderEvent(float partialTicks, MatrixStack matrixStack, Matrix4f matrix4f, Matrix4f matrix4f2) {
         this.partialTicks = partialTicks;
         this.matrixStack = matrixStack;
+        this.matrix4f = matrix4f;
+        this.matrix4f2 = matrix4f2;
     }
 
     /**
@@ -41,14 +46,14 @@ public class RenderEvent extends Event {
      * Types of render events.
      */
     public static class Post extends RenderEvent {
-        public Post(float partialTicks, MatrixStack matrixStack) {
-            super(partialTicks, matrixStack);
+        public Post(float partialTicks, MatrixStack matrixStack, Matrix4f matrix4f, Matrix4f matrix4f2) {
+            super(partialTicks, matrixStack, matrix4f, matrix4f2);
         }
     }
 
     public static class Pre extends RenderEvent {
-        public Pre(float partialTicks, MatrixStack matrixStack) {
-            super(partialTicks, matrixStack);
+        public Pre(float partialTicks, MatrixStack matrixStack, Matrix4f matrix4f, Matrix4f matrix4f2) {
+            super(partialTicks, matrixStack, matrix4f, matrix4f2);
         }
     }
 

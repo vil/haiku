@@ -16,12 +16,14 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix4f;
+import org.joml.Matrix4fStack;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
 /**
  * Rendering Util for Haiku.
+ * TODO fix this for 1.20.6
  */
 public class RenderUtil {
     public static final MinecraftClient mc = MinecraftClient.getInstance();
@@ -30,18 +32,21 @@ public class RenderUtil {
     /**
      * Draws a 3D box
      *
-     * @param matrixStack the matrix stack
+     * @param matrix4f the matrix stack
      * @param box the box to draw
      * @param color the color of the box
      */
-    public static void draw3DBox(MatrixStack matrixStack, Box box, Color color) {
+    public static void draw3DBox(Matrix4f matrix4f, Box box, Color color) {
         float minX = (float) (box.minX - mc.getEntityRenderDispatcher().camera.getPos().getX());
         float minY = (float) (box.minY - mc.getEntityRenderDispatcher().camera.getPos().getY());
         float minZ = (float) (box.minZ - mc.getEntityRenderDispatcher().camera.getPos().getZ());
         float maxX = (float) (box.maxX - mc.getEntityRenderDispatcher().camera.getPos().getX());
         float maxY = (float) (box.maxY - mc.getEntityRenderDispatcher().camera.getPos().getY());
         float maxZ = (float) (box.maxZ - mc.getEntityRenderDispatcher().camera.getPos().getZ());
-        Matrix4f matrix = matrixStack.peek().getPositionMatrix();
+
+        Matrix4fStack matrix4fStack = RenderSystem.getModelViewStack();
+        matrix4fStack.pushMatrix();
+        matrix4fStack.mul(matrix4f);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
 
@@ -51,41 +56,41 @@ public class RenderUtil {
 
         bufferBuilder.begin(VertexFormat.DrawMode.LINES, VertexFormats.POSITION);
         {
-            bufferBuilder.vertex(matrix, minX, minX, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minX, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, minZ).next();
 
-            bufferBuilder.vertex(matrix, maxX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, maxX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, minX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, minZ).next();
 
-            bufferBuilder.vertex(matrix, minX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, minZ).next();
 
-            bufferBuilder.vertex(matrix, maxX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, minZ).next();
 
-            bufferBuilder.vertex(matrix, maxX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, minX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, minX, maxY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, minZ).next();
 
-            bufferBuilder.vertex(matrix, maxX, maxY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, maxX, maxY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, minX, maxY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, minZ).next();
         }
         tessellator.draw();
         clean3D();
@@ -95,38 +100,42 @@ public class RenderUtil {
 
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION);
         {
-            bufferBuilder.vertex(matrix, minX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, minX, maxY, minZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, maxZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, maxZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, minZ).next();
 
-            bufferBuilder.vertex(matrix, minX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, minZ).next();
 
-            bufferBuilder.vertex(matrix, maxX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, minZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, maxZ).next();
-            bufferBuilder.vertex(matrix, maxX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, minX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, maxX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, maxX, maxY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, maxX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, maxZ).next();
 
-            bufferBuilder.vertex(matrix, minX, minY, minZ).next();
-            bufferBuilder.vertex(matrix, minX, minY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, maxZ).next();
-            bufferBuilder.vertex(matrix, minX, maxY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, minZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, minY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, maxZ).next();
+            bufferBuilder.vertex(matrix4fStack, minX, maxY, minZ).next();
         }
         tessellator.draw();
         clean3D();
+
+        RenderSystem.applyModelViewMatrix();
+
+        matrix4fStack.popMatrix();
     }
 
     /**
@@ -136,39 +145,39 @@ public class RenderUtil {
      * @param box the box to outline
      * @param color the color of the outline
      */
-    public static void drawOutlineBox(MatrixStack stack, Box box, Color color) {
-        float minX = (float) (box.minX - mc.getEntityRenderDispatcher().camera.getPos().getX());
-        float minY = (float) (box.minY - mc.getEntityRenderDispatcher().camera.getPos().getY());
-        float minZ = (float) (box.minZ - mc.getEntityRenderDispatcher().camera.getPos().getZ());
-        float maxX = (float) (box.maxX - mc.getEntityRenderDispatcher().camera.getPos().getX());
-        float maxY = (float) (box.maxY - mc.getEntityRenderDispatcher().camera.getPos().getY());
-        float maxZ = (float) (box.maxZ - mc.getEntityRenderDispatcher().camera.getPos().getZ());
-
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuffer();
-        setup3D();
-
-        RenderSystem.setShaderColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-        RenderSystem.setShader(GameRenderer::getRenderTypeLinesProgram);
-        RenderSystem.defaultBlendFunc();
-
-        bufferBuilder.begin(VertexFormat.DrawMode.LINES, VertexFormats.LINES);
-
-        WorldRenderer.drawBox(stack, bufferBuilder, minX, minY, minZ, maxX, maxY, maxZ, color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
-
-        tessellator.draw();
-        clean3D();
-    }
+//    public static void drawOutlineBox(MatrixStack stack, Box box, Color color) {
+//        float minX = (float) (box.minX - mc.getEntityRenderDispatcher().camera.getPos().getX());
+//        float minY = (float) (box.minY - mc.getEntityRenderDispatcher().camera.getPos().getY());
+//        float minZ = (float) (box.minZ - mc.getEntityRenderDispatcher().camera.getPos().getZ());
+//        float maxX = (float) (box.maxX - mc.getEntityRenderDispatcher().camera.getPos().getX());
+//        float maxY = (float) (box.maxY - mc.getEntityRenderDispatcher().camera.getPos().getY());
+//        float maxZ = (float) (box.maxZ - mc.getEntityRenderDispatcher().camera.getPos().getZ());
+//
+//        Tessellator tessellator = Tessellator.getInstance();
+//        BufferBuilder bufferBuilder = tessellator.getBuffer();
+//        setup3D();
+//
+//        RenderSystem.setShaderColor(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
+//        RenderSystem.setShader(GameRenderer::getRenderTypeLinesProgram);
+//        RenderSystem.defaultBlendFunc();
+//
+//        bufferBuilder.begin(VertexFormat.DrawMode.LINES, VertexFormats.LINES);
+//
+//        WorldRenderer.drawBox(stack, bufferBuilder, minX, minY, minZ, maxX, maxY, maxZ, color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
+//
+//        tessellator.draw();
+//        clean3D();
+//    }
 
 
     /**
      * Draws a 2D outline around an entity.
      *
-     * @param matrixStack the matrix stack
+     * @param matrix4f the matrix stack
      * @param entity the entity to outline
      * @param color the color of the outline
      */
-    public static void draw2DOutline(MatrixStack matrixStack, Entity entity, Color color) {
+    public static void draw2DOutline(Matrix4f matrix4f, Entity entity, Color color) {
         Camera c = mc.gameRenderer.getCamera();
         Vec3d camPos = c.getPos();
         Vec3d start = entity.getPos().subtract(camPos);
@@ -181,11 +190,9 @@ public class RenderUtil {
         float sin = (float) (Math.sin(r) * (entity.getWidth() / 1.5));
         float cos = (float) (Math.cos(r) * (entity.getWidth() / 1.5));
 
-        // push the matrix onto the stack
-        matrixStack.push();
-
-        // get the position matrix from the matrix stack
-        Matrix4f matrix = matrixStack.peek().getPositionMatrix();
+        Matrix4fStack matrix4fStack = RenderSystem.getModelViewStack();
+        matrix4fStack.pushMatrix();
+        matrix4fStack.mul(matrix4f);
 
         // get the tessellator instance
         Tessellator tessellator = Tessellator.getInstance();
@@ -213,31 +220,31 @@ public class RenderUtil {
                 VertexFormats.POSITION_COLOR);
 
         // draw the outline as a series of connected lines
-        bufferBuilder.vertex(matrix, x + sin, y, z + cos)
+        bufferBuilder.vertex(matrix4fStack, x + sin, y, z + cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x - sin, y, z - cos)
+        bufferBuilder.vertex(matrix4fStack, x - sin, y, z - cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x - sin, y, z - cos)
+        bufferBuilder.vertex(matrix4fStack, x - sin, y, z - cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x - sin, y + entity.getHeight(), z - cos)
+        bufferBuilder.vertex(matrix4fStack, x - sin, y + entity.getHeight(), z - cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x - sin, y + entity.getHeight(), z - cos)
+        bufferBuilder.vertex(matrix4fStack, x - sin, y + entity.getHeight(), z - cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x + sin, y + entity.getHeight(), z + cos)
+        bufferBuilder.vertex(matrix4fStack, x + sin, y + entity.getHeight(), z + cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x + sin, y + entity.getHeight(), z + cos)
+        bufferBuilder.vertex(matrix4fStack, x + sin, y + entity.getHeight(), z + cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x + sin, y, z + cos)
+        bufferBuilder.vertex(matrix4fStack, x + sin, y, z + cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
-        bufferBuilder.vertex(matrix, x + sin, y, z + cos)
+        bufferBuilder.vertex(matrix4fStack, x + sin, y, z + cos)
                 .color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F)
                 .next();
 
@@ -249,20 +256,21 @@ public class RenderUtil {
 
         // disable blending
         RenderSystem.disableBlend();
+        RenderSystem.applyModelViewMatrix();
 
         // pop the matrix from the stack
-        matrixStack.pop();
+        matrix4fStack.popMatrix();
     }
 
     /**
      * Draws a line from player.
      *
-     * @param matrixStack the matrix stack
+     * @param matrix4f the matrix stack.
      * @param start the start point of the line
      * @param end the end point of the line
      * @param color the color of the line
      */
-    public static void draw3DLineFromPlayer(MatrixStack matrixStack, Vec3d start, Vec3d end, Color color) {
+    public static void draw3DLineFromPlayer(Matrix4f matrix4f, Vec3d start, Vec3d end, Color color) {
         Camera camera = mc.gameRenderer.getCamera();
         float startX = (float) start.x;
         float startY = (float) start.y;
@@ -271,7 +279,9 @@ public class RenderUtil {
         float endY = (float) (end.y - camera.getPos().y);
         float endZ = (float) (end.z - camera.getPos().z);
 
-        Matrix4f matrix = matrixStack.peek().getPositionMatrix();
+        Matrix4fStack matrix4fStack = RenderSystem.getModelViewStack();
+        matrix4fStack.pushMatrix();
+        matrix4fStack.mul(matrix4f);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
 
@@ -281,22 +291,25 @@ public class RenderUtil {
 
         bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
         {
-            bufferBuilder.vertex(matrix, startX, startY, startZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
-            bufferBuilder.vertex(matrix, endX, endY, endZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
+            bufferBuilder.vertex(matrix4fStack, startX, startY, startZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
+            bufferBuilder.vertex(matrix4fStack, endX, endY, endZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
         }
         tessellator.draw();
         clean3D();
+
+        // RenderSystem.applyModelViewMatrix(); Don't need this.
+        matrix4fStack.popMatrix();
     }
 
     /**
      * Draws a line somewhere in the world.
      *
-     * @param matrixStack the matrix stack
+     * @param matrix4f the matrix stack
      * @param start the start point of the line
      * @param end the end point of the line
      * @param color the color of the line
      */
-    public static void draw3DLineInWorld(MatrixStack matrixStack, Vec3d start, Vec3d end, Color color) {
+    public static void draw3DLineInWorld(Matrix4f matrix4f, Vec3d start, Vec3d end, Color color) {
         Camera camera = mc.gameRenderer.getCamera();
         float startX = (float) (start.x - camera.getPos().x);
         float startY = (float) (start.y - camera.getPos().y);
@@ -305,7 +318,10 @@ public class RenderUtil {
         float endY = (float) (end.y - camera.getPos().y);
         float endZ = (float) (end.z - camera.getPos().z);
 
-        Matrix4f matrix = matrixStack.peek().getPositionMatrix();
+        Matrix4fStack matrix4fStack = RenderSystem.getModelViewStack();
+        matrix4fStack.pushMatrix();
+        matrix4fStack.mul(matrix4f);
+
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
 
@@ -315,11 +331,14 @@ public class RenderUtil {
 
         bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
         {
-            bufferBuilder.vertex(matrix, startX, startY, startZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
-            bufferBuilder.vertex(matrix, endX, endY, endZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
+            bufferBuilder.vertex(matrix4fStack, startX, startY, startZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
+            bufferBuilder.vertex(matrix4fStack, endX, endY, endZ).color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F).next();
         }
         tessellator.draw();
         clean3D();
+
+        RenderSystem.applyModelViewMatrix();
+        matrix4fStack.popMatrix();
     }
 
     /**

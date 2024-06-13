@@ -14,14 +14,12 @@ import org.joml.Matrix4f;
 public class RenderEvent extends Event {
     protected float partialTicks;
     protected Matrix4f matrix4f;
-    protected Matrix4f matrix4f2;
-    protected MatrixStack matrixStack;
+    protected Matrix4f positionMatrix;
 
-    public RenderEvent(float partialTicks, MatrixStack matrixStack, Matrix4f matrix4f, Matrix4f matrix4f2) {
+    public RenderEvent(float partialTicks, Matrix4f matrix4f, Matrix4f positionMatrix) {
         this.partialTicks = partialTicks;
-        this.matrixStack = matrixStack;
         this.matrix4f = matrix4f;
-        this.matrix4f2 = matrix4f2;
+        this.positionMatrix = positionMatrix;
     }
 
     /**
@@ -34,26 +32,26 @@ public class RenderEvent extends Event {
     }
 
     /**
-     * Gets the matrix stack.
+     * Gets the matrix.
      *
-     * @return matrix stack
+     * @return matrix4f
      */
-    public MatrixStack getMatrixStack() {
-        return matrixStack;
+    public Matrix4f getMatrix4f() {
+        return matrix4f;
     }
 
     /**
      * Types of render events.
      */
     public static class Post extends RenderEvent {
-        public Post(float partialTicks, MatrixStack matrixStack, Matrix4f matrix4f, Matrix4f matrix4f2) {
-            super(partialTicks, matrixStack, matrix4f, matrix4f2);
+        public Post(float partialTicks, Matrix4f matrix4f, Matrix4f positionMatrix) {
+            super(partialTicks, matrix4f, positionMatrix);
         }
     }
 
     public static class Pre extends RenderEvent {
-        public Pre(float partialTicks, MatrixStack matrixStack, Matrix4f matrix4f, Matrix4f matrix4f2) {
-            super(partialTicks, matrixStack, matrix4f, matrix4f2);
+        public Pre(float partialTicks, Matrix4f matrix4f, Matrix4f positionMatrix) {
+            super(partialTicks, matrix4f, positionMatrix);
         }
     }
 

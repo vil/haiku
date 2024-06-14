@@ -24,6 +24,7 @@ public class ModuleManager {
         modules = new ArrayList<>();
 
         /* Add modules here */
+        modules.add(new AntiFall());
         modules.add(new Dummy());
         modules.add(new Fly());
         modules.add(new Gui());

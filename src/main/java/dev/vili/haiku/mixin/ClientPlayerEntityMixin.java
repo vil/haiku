@@ -8,6 +8,7 @@
 package dev.vili.haiku.mixin;
 
 import dev.vili.haiku.Haiku;
+import dev.vili.haiku.event.events.MoveEvent;
 import dev.vili.haiku.event.events.TickEvent;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,6 +24,18 @@ public class ClientPlayerEntityMixin {
         if (Haiku.mc.player != null && Haiku.mc.world != null) {
             TickEvent event = new TickEvent();
             Haiku.getInstance().getEventBus().post(event);
+        }
+    }
+
+    @Inject(method = "tickMovement", at = @At("HEAD"))
+    private void tickMovement(CallbackInfo ci) {
+        if (Haiku.mc.player != null && Haiku.mc.world != null) {
+            MoveEvent event = new MoveEvent();
+            Haiku.getInstance().getEventBus().post(event);
+
+            if (event.isCancelled()) {
+                ci.cancel();
+            }
         }
     }
 }

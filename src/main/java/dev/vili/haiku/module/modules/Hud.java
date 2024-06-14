@@ -16,6 +16,8 @@ import dev.vili.haiku.setting.settings.StringSetting;
 import dev.vili.haiku.util.TPSUtil;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.Objects;
+
 public class Hud extends Module {
     public final BooleanSetting watermark = new BooleanSetting("Watermark", "Renders the Haiku watermark.", true);
     public final StringSetting watermarkText = new StringSetting("Watermark Text", "The text of the watermark.");
@@ -26,6 +28,15 @@ public class Hud extends Module {
     public Hud() {
         super("Hud", "Renders the Haiku hud.", GLFW.GLFW_KEY_UNKNOWN, Category.RENDER);
         this.addSettings(watermark, watermarkText, arraylist, ticks, fps);
+    }
+
+    @Override
+    public void onEnable() {
+        if (Objects.equals(watermarkText.getString(), "") || watermarkText.getString() == null) {
+            watermarkText.setString("Haiku");
+        }
+
+        super.onEnable();
     }
 
     @HaikuSubscribe

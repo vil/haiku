@@ -65,7 +65,7 @@ public class ModuleTabs {
 
             ImGui.begin(category.name(), ImGuiWindowFlags.NoResize);
             if (!categoryMap.get(category)) {
-                ImGui.setWindowSize(250 * HaikuGui.guiWidth.get(), 300 * HaikuGui.guiHeight.get());
+                ImGui.setWindowSize(250, 300);
                 categoryMap.put(category, true);
             }
 

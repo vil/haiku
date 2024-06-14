@@ -23,7 +23,7 @@ public class Sprint extends Module {
     public void onTick(TickEvent event) {
         if (mc.world == null || mc.player == null) return;
 
-        if (mc.player.forwardSpeed > 0 && !mc.player.horizontalCollision && !mc.player.isSneaking()) {
+        if (mc.player.forwardSpeed > 0 && !mc.player.horizontalCollision && !mc.player.isSneaking() && !mc.player.isUsingItem()) {
             mc.player.setSprinting(true);
         }
     }

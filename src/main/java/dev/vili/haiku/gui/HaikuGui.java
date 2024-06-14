@@ -31,8 +31,6 @@ import net.minecraft.text.Text;
  */
 public class HaikuGui extends Screen {
     public static boolean isOpen = false;
-    public static final ImFloat guiHeight = new ImFloat(1.0f);
-    public static final ImFloat guiWidth = new ImFloat(1.0f);
     public static final ImBoolean showGizmo = new ImBoolean(false);
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
     private final ImGuiImplGl3 implGl3 = new ImGuiImplGl3();
@@ -83,12 +81,10 @@ public class HaikuGui extends Screen {
             ImGui.text("Cmd prefix: " + Haiku.getInstance().getCommandManager().prefix);
 
             // Sliders to scale the gui.
-            ImGui.sliderFloat("Gui Height", guiHeight.getData(), 0.5f, 2.0f);
-            ImGui.sliderFloat("Gui Width", guiWidth.getData(), 0.5f, 2.0f);
             ImGui.checkbox("Show Gizmo", showGizmo);
 
             // Set the gui scale.
-            ImGui.setWindowSize(250 * guiWidth.get(), 120 * guiHeight.get());
+            ImGui.setWindowSize(260, 120);
 
             // Render module tabs
             ModuleTabs.render();

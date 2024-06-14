@@ -8,27 +8,28 @@
 package dev.vili.haiku.event.events;
 
 import dev.vili.haiku.event.Event;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Matrix4f;
 
 public class RenderEvent extends Event {
-    protected float partialTicks;
+    protected RenderTickCounter tickCounter;
     protected Matrix4f matrix4f;
     protected Matrix4f positionMatrix;
 
-    public RenderEvent(float partialTicks, Matrix4f matrix4f, Matrix4f positionMatrix) {
-        this.partialTicks = partialTicks;
+    public RenderEvent(RenderTickCounter tickCounter, Matrix4f matrix4f, Matrix4f positionMatrix) {
+        this.tickCounter = tickCounter;
         this.matrix4f = matrix4f;
         this.positionMatrix = positionMatrix;
     }
 
     /**
-     * Gets the partial ticks.
+     * Gets the tick counter.
      *
-     * @return partial ticks
+     * @return tick counter.
      */
-    public float getPartialTicks() {
-        return partialTicks;
+    public RenderTickCounter getTickCounter() {
+        return tickCounter;
     }
 
     /**
@@ -44,14 +45,14 @@ public class RenderEvent extends Event {
      * Types of render events.
      */
     public static class Post extends RenderEvent {
-        public Post(float partialTicks, Matrix4f matrix4f, Matrix4f positionMatrix) {
-            super(partialTicks, matrix4f, positionMatrix);
+        public Post(RenderTickCounter tickCounter, Matrix4f matrix4f, Matrix4f positionMatrix) {
+            super(tickCounter, matrix4f, positionMatrix);
         }
     }
 
     public static class Pre extends RenderEvent {
-        public Pre(float partialTicks, Matrix4f matrix4f, Matrix4f positionMatrix) {
-            super(partialTicks, matrix4f, positionMatrix);
+        public Pre(RenderTickCounter tickCounter, Matrix4f matrix4f, Matrix4f positionMatrix) {
+            super(tickCounter, matrix4f, positionMatrix);
         }
     }
 

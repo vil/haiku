@@ -2,13 +2,19 @@
     "configurations": [
         {
             "type": "gradle",
-            "name": "Gradlew runClient",
+            "name": "Run Client",
             "tasks": ["runClient"],
         },
         {
             "type": "gradle",
-            "name": "Gradlew build",
+            "name": "Build jar",
             "tasks": ["build"],
         },
+        {
+            "type": "gradle",
+            "name": "Generate Sources",
+            "tasks": ["genSources"],
+        },
+
     ]
 }

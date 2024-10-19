@@ -23,7 +23,7 @@ repositories {
 
 ext {
     lwjglVersion = '3.3.1'
-    imguiVersion = '1.87.3'
+    imguiVersion = '1.87.5'
 }
 
 dependencies {
